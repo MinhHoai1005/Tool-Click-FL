@@ -52,3 +52,27 @@ firebase init
 yarn build
 firebase deploy
 yarn build
+
+## router
+yarn add react-router-dom
+yarn add @types/react-router-dom
+
+## material
+yarn add @mui/material @emotion/react @emotion/styled
+yarn add @mui/icons-material
+yarn add @mui/material @mui/styles
+yarn add @mui/lab
+
+## app
+/login
+/admin:layout
+
+/admin/*
+features: /admin/dashbord
+features: /admin/setting
+
+features: auth / authentication
+- login
+- sing up / register
+- forget password
+
