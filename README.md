@@ -56,6 +56,8 @@ yarn build
 ## router
 yarn add react-router-dom
 yarn add @types/react-router-dom
+yarn add connected-react-router
+yarn add history
 
 ## material
 yarn add @mui/material @emotion/react @emotion/styled

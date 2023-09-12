@@ -1,10 +1,10 @@
-import {Outlet,Navigate} from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
 
-const PrivateRoutes = ()=>{
-  let auth ={'token':false}
+const PrivateRoutes = () => {
+  const isLoginIn = Boolean(localStorage.getItem('access_token'))
 
   return (
-    auth.token?<Outlet/>:<Navigate to='/login'/>
+    isLoginIn ? <Outlet /> : <Navigate to='/login' />
   )
 }
 export default PrivateRoutes
