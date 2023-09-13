@@ -6,8 +6,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { CssBaseline } from '@mui/material'
-import { ConnectedRouter } from 'connected-react-router';
-import { history } from 'utils'
+import { BrowserRouter } from 'components/Common/customReduxRouter';
+
+import { history } from 'utils';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -15,10 +16,10 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+      <BrowserRouter history={history}>
         <CssBaseline />
         <App />
-      </ConnectedRouter>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
