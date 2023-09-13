@@ -1,6 +1,6 @@
-import { Box, Button, Paper, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Paper, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles';
-import { useAppDispatch } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import * as React from 'react'
 import { authAction } from '../authSlice';
 
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 export function LoginPage() {
   const classes = useStyles();
   const dispatch = useAppDispatch();
+  const isLoginIn = useAppSelector(state => state.auth.logging)
 
   const handleLoginClick = () => {
     dispatch(authAction.login({ email: '', password: '' }))
@@ -32,6 +33,7 @@ export function LoginPage() {
         <Typography variant='h5' component='h1'>Admin page</Typography>
         <Box mt={4}>
           <Button variant='contained' color='primary' onClick={handleLoginClick}>
+            {isLoginIn && <CircularProgress size={20} color='secondary' />} &nbsp;
             Fake Login
           </Button>
         </Box>
