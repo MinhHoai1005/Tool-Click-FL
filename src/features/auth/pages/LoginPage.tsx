@@ -1,43 +1,75 @@
-import { Box, Button, CircularProgress, Paper, Typography } from '@mui/material'
-import { makeStyles } from '@mui/styles';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import * as React from 'react'
-import { authAction } from '../authSlice';
+import { useAppDispatch } from 'app/hooks';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import {  AuthState } from '../authSlice';
+import "./styles.css"
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexFlow: 'row nowrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-  },
-  box: {
-    padding: '4px'
-  },
-}));
+export const LoginPage = () => {
 
-export function LoginPage() {
-  const classes = useStyles();
+  const [inputs, setInputs] = useState({
+    username: '',
+    password: '',
+  });
+  const [submitted, setSubmitted] = useState(false);
+
   const dispatch = useAppDispatch();
-  const isLoginIn = useAppSelector(state => state.auth.logging)
+  const loading = useSelector<AuthState>((state: any) => state.auth.logging);
 
-  const handleLoginClick = () => {
-    dispatch(authAction.login({ email: '', password: '' }))
-  }
-
+  const history = useNavigate()
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
+  };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitted(true);
+    console.log(inputs)
+    // dispatch(authAction.login({ username: '', password: '' }))
+  };
+  useEffect(() => {
+    const isLoginIn = Boolean(localStorage.getItem('access_token'))
+    if (isLoginIn) {
+      history('/admin');
+    }
+    console.log(loading)
+  })
 
   return (
-    <div className={classes.root}>
-      <Paper elevation={1} className={classes.box}>
-        <Typography variant='h5' component='h1'>Admin page</Typography>
-        <Box mt={4}>
-          <Button variant='contained' color='primary' onClick={handleLoginClick}>
-            {isLoginIn && <CircularProgress size={20} color='secondary' />} &nbsp;
-            Fake Login
-          </Button>
-        </Box>
-      </Paper>
-    </div>
+    <div className="layout-login">
+      <div className="background">
+        <div className="shape" />
+        <div className="shape" />
+      </div>
+      <form onSubmit={handleSubmit}>
+        <h3>Login Here</h3>
+        <label htmlFor="username">Username</label>
+        <input type="text" placeholder="Email or Phone" name="username" onInput={handleInput}
+          // className={
+          //   (submitted && !inputs.username ? 'is-invalid' : '')
+          // }
+          />
+        <label htmlFor="password">Password</label>
+        <input type="password" placeholder="Password" name="password" onInput={handleInput}
+          // className={
+          //   (submitted && !inputs.password ? 'is-invalid' : '')
+          // }
+        />
+        <button >
+          <>{loading && (
+            <span className='spinner-border spinner-border-sm mr-1'></span>
+          )}</>
+
+          Login In
+        </button>
+        <div className="social">
+          <div className="go"><i className="fab fa-google" /> Google</div>
+          <div className="fb"><i className="fab fa-facebook" /> Facebook</div>
+        </div>
+      </form>
+    </div >
   )
+};
+function useHistory() {
+  throw new Error('Function not implemented.');
 }
