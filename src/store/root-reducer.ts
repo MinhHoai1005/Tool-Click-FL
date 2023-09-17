@@ -1,11 +1,10 @@
 import { combineReducers } from "redux"
 import { authReducer } from "./Auth/reducer"
-import { AuthState } from "./Auth/types"
+import { connectRouter } from 'connected-react-router';
+import reduxReducers from "./redux/reduxSlice";
 
-export interface StateReducer {
-    auth: AuthState
-}
-
-export const rootReducer = combineReducers<StateReducer>({
+export const rootReducer = combineReducers({
     auth: authReducer,
+    router: connectRouter(history),
+    redux: reduxReducers,
 })
