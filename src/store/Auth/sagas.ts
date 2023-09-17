@@ -6,7 +6,6 @@ import {  IUser, RPUser } from "models"
 import { api } from "config/config"
 import { Fetch } from "utils/fetch"
 import helper from "utils/helper"
-import { useNavigate } from "react-router-dom"
 
 export function* authorize(data) {
     let { code, path, history } = data.payload

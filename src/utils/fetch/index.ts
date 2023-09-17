@@ -256,14 +256,6 @@ export class Fetch {
                 }) as unknown as Promise<IResponse<T>>
             }
 
-            if (error?.response?.data?.code === 401) {
-                removeItemLocalStorage("token")
-                removeItemLocalStorage("user")
-                window.location.href = `/qlns/login?previous_path=${encodeURIComponent(
-                    window.location.pathname + window.location.search
-                )}`
-            }
-
             return error?.response?.data
         }
     }

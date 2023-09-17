@@ -10,27 +10,24 @@ export const LoginPage = () => {
     username: '',
     password: '',
   });
-  const [submitted, setSubmitted] = useState(false);
 
-  const history = useNavigate()
+  const navigate = useNavigate();
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   };
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
     let response = await login("111","2222")
     if (response.token !==""){
-      console.log(1111)
-      history('/admin');
-      console.log(444)
+      navigate('/admin', { replace: true });
+      console.log(inputs)
     }
   };
   useEffect(() => {
     const isLoginIn = Boolean(localStorage.getItem('access_token'))
     if (isLoginIn) {
-      history('/admin');
+      navigate('/admin', { replace: true });
     }
   })
 
@@ -69,6 +66,3 @@ export const LoginPage = () => {
     </div >
   )
 };
-function useHistory() {
-  throw new Error('Function not implemented.');
-}
