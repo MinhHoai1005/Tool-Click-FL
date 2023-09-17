@@ -9,7 +9,7 @@ function* handleLogin(payload: LoginPayload) {
     try {
         localStorage.setItem('access_token', 'token')
         yield put(authAction.loginSuccess({
-            id: 1,
+            id:"",
             email: "string",
             username: "string",
             phone: "string",

@@ -1,6 +1,6 @@
 import { useAppDispatch } from 'app/hooks';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import {  AuthState } from '../authSlice';
+import {  authAction, AuthState } from '../authSlice';
 import "./styles.css"
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
@@ -25,9 +25,10 @@ export const LoginPage = () => {
     e.preventDefault();
     setSubmitted(true);
     console.log(inputs)
-    // dispatch(authAction.login({ username: '', password: '' }))
+    dispatch(authAction.login({ email: '', password: '' }))
   };
   useEffect(() => {
+    console.log(history)
     const isLoginIn = Boolean(localStorage.getItem('access_token'))
     if (isLoginIn) {
       history('/admin');
