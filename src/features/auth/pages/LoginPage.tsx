@@ -18,13 +18,16 @@ export const LoginPage = () => {
   };
   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let response = await login("111","2222")
-    if (response.token !==""){
-      navigate('/admin', { replace: true });
-      console.log(inputs)
-    }
+    console.log(navigate)
+    // let response = await login("111","2222")
+    // if (response.token !==""){
+    //   console.log(navigate)
+    //   navigate('/admin', { replace: true });
+    //   console.log(inputs)
+    // }
   };
   useEffect(() => {
+    console.log(navigate)
     const isLoginIn = Boolean(localStorage.getItem('access_token'))
     if (isLoginIn) {
       navigate('/admin', { replace: true });

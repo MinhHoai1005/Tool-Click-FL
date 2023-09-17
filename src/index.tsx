@@ -8,11 +8,10 @@ import { CssBaseline } from '@mui/material'
 import { BrowserRouter } from 'components/Common/customReduxRouter';
 
 import { history } from 'utils';
-import { configureStore } from 'store';
+import { store } from 'store';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-const store =configureStore();
 
 root.render(
   <React.StrictMode>

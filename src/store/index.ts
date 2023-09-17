@@ -1,33 +1,19 @@
 /**
  * Main store function
  */
- import { createStore, applyMiddleware, compose, Store } from "redux"
  import createSagaMiddleware from "redux-saga"
- import { composeWithDevTools } from "redux-devtools-extension"
+ import { routerMiddleware } from 'connected-react-router';
  import { rootReducer } from "./root-reducer"
- import rootSagas from "./root-sagas"
+ import { configureStore } from '@reduxjs/toolkit';
+ import { history } from 'utils';
+ import rootSaga from './root-sagas';
+
+ const sagaMiddleware = createSagaMiddleware()
+ export const store = configureStore({
+   reducer: rootReducer,
+   middleware: (getDefaultMiddleware) =>
+     getDefaultMiddleware().concat(sagaMiddleware, routerMiddleware(history)),
+ });
  
- export function configureStore() {
-     // Middleware and store enhancers
-     const sagaMiddleware = createSagaMiddleware()
- 
-     let middleware = applyMiddleware(sagaMiddleware)
- 
-     let env = process.env.NODE_ENV
- 
-     if (env !== "production") {
-         let devToolsExtension = window["devToolsExtension"]
-         if (typeof devToolsExtension === "function") {
-             middleware = compose(middleware, devToolsExtension())
-         } else {
-             middleware = compose(middleware, composeWithDevTools())
-         }
-     }
- 
-     const store = createStore(rootReducer, middleware)
- 
-     sagaMiddleware.run(rootSagas)
- 
-     return store
- }
+ sagaMiddleware.run(rootSaga)
  
