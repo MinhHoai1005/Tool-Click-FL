@@ -11,7 +11,6 @@ export const LoginPage = () => {
     username: '',
     password: '',
   });
-  const [isLoginIn, setIsLoginIn] = useState<boolean>(false)
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
@@ -20,8 +19,7 @@ export const LoginPage = () => {
     e.preventDefault();
     let response = await login("111", "2222")
     if (response.token !== "") {
-      setIsLoginIn(true)
-      console.log(inputs)
+      checkLogin()
     }
   };
   useEffect(() => {
