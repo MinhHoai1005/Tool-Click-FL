@@ -1,7 +1,6 @@
 /*eslint no-throw-literal: "off"*/
 import { Fetch } from "../fetch"
 import { api } from "../../config/config"
-import helper from "../helper"
 import { IPermissionCheckList, IUser } from "models"
 
 interface IUserInfoResponse extends IUser {}
@@ -16,7 +15,7 @@ export const getUserInfo = async (): Promise<IUserInfoResponse> => {
             throw response
         }
     } catch (error) {
-        helper.log("getUserInfo", error)
+        console.log("getUserInfo", error)
         throw error
     }
 }
@@ -31,7 +30,7 @@ export const logout = async () => {
             throw response?.message
         }
     } catch (error) {
-        helper.log("logOut", error)
+        console.log("logOut", error)
         throw error
     }
 }
@@ -78,7 +77,7 @@ export const getPermissionInfo = async (employeeId: number) => {
             throw response?.code_message_value ?? response?.message
         }
     } catch (error) {
-        helper.log("getPermissionInfo", error)
+        console.log("getPermissionInfo", error)
         throw error
     }
 }

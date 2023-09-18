@@ -25,10 +25,15 @@ export const LoginPage = () => {
     }
   };
   useEffect(() => {
-    // if (Boolean(localStorage.getItem('token'))) {
-    //   navigate("/admin");
-    // }
+    if (Boolean(localStorage.getItem('token'))) {
+      checkLogin();
+    }
   })
+  const checkLogin = async () => {
+    if (!window.location.pathname.includes("/admin")){
+    navigate("/admin");
+    }
+  }
 
   return (
     <div className="layout-login">
