@@ -1,37 +1,33 @@
 // import { useAppDispatch } from 'app/hooks';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import "./styles.css"
-import { useNavigate } from 'react-router-dom'
-import {  login } from 'store/Auth/sagas';
+import { useNavigate } from "react-router-dom";
+import { login } from 'store/Auth/sagas';
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
     username: '',
     password: '',
   });
-
-  const navigate = useNavigate();
+  const [isLoginIn, setIsLoginIn] = useState<boolean>(false)
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   };
-  const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(navigate)
-    // let response = await login("111","2222")
-    // if (response.token !==""){
-    //   console.log(navigate)
-    //   navigate('/admin', { replace: true });
-    //   console.log(inputs)
-    // }
+    let response = await login("111", "2222")
+    if (response.token !== "") {
+      setIsLoginIn(true)
+      console.log(inputs)
+    }
   };
   useEffect(() => {
-    console.log(navigate)
-    const isLoginIn = Boolean(localStorage.getItem('access_token'))
-    if (isLoginIn) {
-      navigate('/admin', { replace: true });
-    }
+    // if (Boolean(localStorage.getItem('token'))) {
+    //   navigate("/admin");
+    // }
   })
 
   return (

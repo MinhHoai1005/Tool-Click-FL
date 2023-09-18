@@ -5,7 +5,6 @@ import { setItemLocalStorage, sleep } from "../../utils"
 import {  IUser, RPUser } from "models"
 import { api } from "config/config"
 import { Fetch } from "utils/fetch"
-import helper from "utils/helper"
 
 export function* authorize(data) {
     let { code, path, history } = data.payload
@@ -57,7 +56,7 @@ export const getUserInfo = async (): Promise<IUserInfoResponse> => {
             throw response
         }
     } catch (error) {
-        helper.log("getUserInfo", error)
+        console.log("getUserInfo", error)
         throw error
     }
 }
@@ -102,7 +101,7 @@ export const login = async (user_name: string,pass_word:string) => {
             throw response?.code_message_value ?? response?.message
         }
     } catch (error) {
-        helper.log("getPermissionInfo", error)
+        console.log("getPermissionInfo", error)
         throw error
     }
 }
