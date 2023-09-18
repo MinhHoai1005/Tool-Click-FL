@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { LoginPage } from 'features/auth/pages/LoginPage';
+import LoginPage  from 'features/auth/pages/LoginPage';
 import { AdminLayout } from 'components/Layout';
 import { NotFound } from 'components/Common';
 import PrivateRoutes from 'components/Common/PrivateRoutes';

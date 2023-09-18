@@ -4,7 +4,7 @@ import "./styles.css"
 import { useNavigate } from "react-router-dom";
 import { login } from 'store/Auth/sagas';
 
-export const LoginPage = () => {
+function LoginPage () {
   const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
@@ -19,19 +19,21 @@ export const LoginPage = () => {
     e.preventDefault();
     let response = await login("111", "2222")
     if (response.token !== "") {
-      checkLogin()
+      // checkLogin()
     }
   };
+
   useEffect(() => {
-    if (Boolean(localStorage.getItem('token'))) {
-      checkLogin();
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      // Sử dụng setTimeout để chuyển hướng sau khi component đã render xong.
+      setTimeout(() => {
+        navigate('/admin');
+      }, 0);
     }
-  })
-  const checkLogin = async () => {
-    if (!window.location.pathname.includes("/admin")){
-    navigate("/admin");
-    }
-  }
+  }, [navigate]);
+
 
   return (
     <div className="layout-login">
@@ -68,3 +70,4 @@ export const LoginPage = () => {
     </div >
   )
 };
+export default LoginPage;
