@@ -53,6 +53,10 @@ yarn build
 firebase deploy
 yarn build
 
+## Login in Google and Facebook with firebase
+yarn add firebase/app
+yarn add @firebase/auth
+
 ## router
 yarn add react-router-dom
 yarn add @types/react-router-dom
@@ -64,6 +68,8 @@ yarn add @mui/material @emotion/react @emotion/styled
 yarn add @mui/icons-material
 yarn add @mui/material @mui/styles
 yarn add @mui/lab
+
+
 
 ## app
 /login
