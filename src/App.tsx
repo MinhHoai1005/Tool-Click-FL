@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import LoginPage  from 'features/auth/pages/LoginPage';
 import { AdminLayout } from 'components/Layout';
 import { NotFound } from 'components/Common';
 import PrivateRoutes from 'components/Common/PrivateRoutes';
+import { Register } from 'features/auth/pages/Register';
+import { ForgotPassword } from 'features/auth/pages/ForgotPassword';
+import Home from 'features/auth/pages/Home';
+import Login from 'features/auth/pages/Login';
 
 function App() {
   useEffect(() => {
@@ -17,8 +20,11 @@ function App() {
           <Route element={<AdminLayout />} path="/" />
           <Route element={<AdminLayout />} path="/admin" />
         </Route>
-        <Route path='/login' element={<LoginPage></LoginPage>}>
-        </Route>
+        <Route path='/login' element={<Login></Login>} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgotPassword/>} />
+
+        <Route path='/home' element={<Home />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

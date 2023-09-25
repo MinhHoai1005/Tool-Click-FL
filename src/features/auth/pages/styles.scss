@@ -1,0 +1,126 @@
+/* css login */
+
+.home-login {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.43);
+    height: 100vh;
+
+    .home-login-form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        border-radius: 3px;
+        background: #FFF;
+        width: 560px;
+        height: 488px;
+        align-items: center;
+        text-align: center;
+        padding: 46px 43px 24px 43px;
+
+        .home-login-form-close {
+            float: right;
+
+            svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        h3 {
+            color: #000;
+            text-align: center;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        .login-with {
+            padding-top: 21px;
+
+            .btn-login {
+                padding-left: 38px;
+                display: flex;
+                height: 72px;
+                align-items: center;
+                border: none;
+                margin-top: 8px;
+
+                h6 {
+                    padding-left: 29px;
+                    color: #FFF;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                }
+            }
+
+            .login-with-toolclick {
+                background: #F28118;
+            }
+
+            .login-with-facebook {
+                background: #1877F2;
+            }
+
+            .login-with-gmail {
+                background: #70396D;
+            }
+        }
+    }
+}
+
+// register
+.register {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.43);
+    height: 100vh;
+
+    .register-form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        border-radius: 3px;
+        background: #FFF;
+        width: 560px;
+        min-height: 500px;
+        align-items: center;
+        text-align: center;
+        padding: 46px 43px 24px 43px;
+    }
+
+}
+
+
+
+
+
+
+
+.form-close {
+    float: right;
+
+    svg {
+        width: 30px;
+        height: 30px;
+        color: none;
+        cursor: pointer;
+    }
+}
+
+h3 {
+    color: #000;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.btn{
+    cursor: pointer;
+}
