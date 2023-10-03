@@ -1,0 +1,25 @@
+.css-41abqd-MuiTableContainer-root {
+  overflow-x: hidden;
+}
+
+.admin-account {
+  .show-action {
+    position: absolute;
+    z-index: 1;
+    top: 52px;
+    width: 150px;
+    left: 42px;
+    background-color: #FFFFFF;
+    padding: 8px 12px;
+    text-align: left;
+
+    div {
+      padding: 8px 12px;
+    }
+
+    div:hover {
+      cursor: pointer;
+      color: #F26522;
+    }
+  }
+}

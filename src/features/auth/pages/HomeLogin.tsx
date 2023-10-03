@@ -17,7 +17,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const providerfb = new FacebookAuthProvider();
 
-function Home() {
+function HomeLogin() {
 
     const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ function Home() {
     };
 
     const loginWithToolPlus = () => {
-        navigate('/login');
+        navigate('/login-toolplus');
     }
     return (
         <div className='home-login'>
@@ -83,4 +83,4 @@ function Home() {
         </div>
     )
 }
-export default Home;
+export default HomeLogin;
