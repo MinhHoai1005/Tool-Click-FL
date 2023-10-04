@@ -18,3 +18,8 @@ export interface MenuChildren {
     url: string
     img?: string
 }
+export interface ActionDialog {
+    title: string
+    span: string
+    onAgree: Function
+}

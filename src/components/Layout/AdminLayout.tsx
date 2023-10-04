@@ -12,6 +12,7 @@ const drawerWidth: number = 240;
 
 export const AdminLayout = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -31,8 +32,8 @@ export const AdminLayout = () => {
           <Route path="category" element={<Category />} />
           <Route path="money" element={<Money />} />
           <Route path="setting" element={<Setting />} />
-
         </Routes>
+
       </Box>
     </Box>
   )

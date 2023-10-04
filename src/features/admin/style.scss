@@ -22,4 +22,43 @@
       color: #F26522;
     }
   }
+
+  /* DeleteButton.css */
+  .delete-button {
+    position: relative;
+  }
+
+  .delete-button:hover::before {
+    content: 'Xóa';
+    position: absolute;
+    top: -20px;
+    /* Điều chỉnh vị trí của văn bản Xóa */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .check-button {
+    position: relative;
+  }
+
+  .check-button:hover::before {
+    content: 'Active/In Active';
+    position: absolute;
+    top: -20px;
+    /* Điều chỉnh vị trí của văn bản Xóa */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
 }
