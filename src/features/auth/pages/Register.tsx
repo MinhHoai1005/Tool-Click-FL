@@ -13,19 +13,20 @@ import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import { Link, Typography } from '@mui/material';
+import { register } from 'utils/apis/authentication';
 
 
 export const Register = () => {
 
     const [inputs, setInputs] = useState({
-        username: '',
+        user_name: '',
         email: '',
         phone: '',
         password: '',
         enter_password: '',
     });
     const [errors, setErrors] = useState({
-        username: '',
+        user_name: '',
         email: '',
         password: '',
         enter_password: '',
@@ -38,11 +39,11 @@ export const Register = () => {
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setInputs((inputs) => ({ ...inputs, [name]: value }));
-        if (errors.username != "") {
-            if (inputs.username === '') {
-                setErrors((err) => ({ ...err, username: "Vui lòng nhập tên tài khoản" }));
+        if (errors.user_name != "") {
+            if (inputs.user_name === '') {
+                setErrors((err) => ({ ...err, user_name: "Vui lòng nhập tên tài khoản" }));
             } else {
-                setErrors((err) => ({ ...err, username: "" }));
+                setErrors((err) => ({ ...err, user_name: "" }));
             }
         }
         if (errors.email != "") {
@@ -69,20 +70,29 @@ export const Register = () => {
     };
 
 
-    const handleSubmit = () => {
-        if (inputs.username === '') {
-            setErrors((err) => ({ ...err, username: "Vui lòng nhập tên tài khoản" }));
+    const handleSubmit = async () => {
+        if (inputs.user_name === '') {
+            setErrors((err) => ({ ...err, user_name: "Vui lòng nhập tên tài khoản" }));
+            return
         }
         if (inputs.email === '') {
             setErrors((err) => ({ ...err, email: "Vui lòng nhập email" }));
+            return
         }
         if (inputs.password === '') {
             setErrors((err) => ({ ...err, password: "Vui lòng nhập mật khẩu" }));
+            return
         }
         if (inputs.enter_password === '') {
             setErrors((err) => ({ ...err, enter_password: "Vui lòng nhập lại mật khẩu" }));
+            return
         }
-        console.log(inputs)
+        if (inputs.password !== inputs.enter_password) {
+            setErrors((err) => ({ ...err, enter_password: "Nhập lại mật khẩu chưa khớp" }));
+            return
+        }
+        let res = await register(inputs.user_name, inputs.email, inputs.phone, inputs.password)
+        // console.log(res)
     };
 
     const handleClickShowEnterPassword = () =>
@@ -115,10 +125,10 @@ export const Register = () => {
                     }
                     variant="standard"
                     fullWidth
-                    name="username"
+                    name="user_name"
                     onInput={handleInput}
-                    error={!!errors.username}
-                    helperText={errors.username}
+                    error={!!errors.user_name}
+                    helperText={errors.user_name}
 
                 />
                 <TextField

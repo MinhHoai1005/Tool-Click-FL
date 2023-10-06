@@ -7,7 +7,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-
+import validator from 'validator';
+import { login } from 'store/Auth/sagas';
 
 function Login() {
   const navigate = useNavigate();
@@ -25,6 +26,12 @@ function Login() {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
 
+    if (name === "email") {
+      // Kiểm tra định dạng email và cập nhật trạng thái isValidEmail
+      if (validator.isEmail(value)) {
+        setErrors((err) => ({ ...err, email: "Email không hợp lệ" }));
+      }
+    }
     if (errors.email != "") {
       if (inputs.email === '') {
         setErrors((err) => ({ ...err, email: "Vui lòng nhập email" }));
@@ -52,14 +59,15 @@ function Login() {
     }
   }, [navigate]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (inputs.email === '') {
       setErrors((err) => ({ ...err, email: "Vui lòng nhập tên tài khoản" }));
     }
     if (inputs.password === '') {
       setErrors((err) => ({ ...err, password: "Vui lòng nhập mật khẩu" }));
     }
-    console.log(inputs)
+    let res = await login(inputs.email, inputs.password)
+    console.log(res)
   };
 
   const handleClickShowPassword = () => setShow((show) => !show);
@@ -73,11 +81,11 @@ function Login() {
         <div className='form-close'>
           <FontAwesomeIcon icon={faXmark} />
         </div>
-        <h3>Đăng ký tài khoản</h3>
+        <h3>Đăng nhập tài khoản</h3>
         <TextField
           label={
             <div>
-              Tên tài khoản <span style={{ color: 'red' }}>*</span>
+              Địa chỉ email <span style={{ color: 'red' }}>*</span>
             </div>
           }
           variant="standard"

@@ -2,7 +2,7 @@
 import { takeEvery, put, call, all } from "redux-saga/effects"
 import { AuthActionTypes } from "./types"
 import { setItemLocalStorage, sleep } from "../../utils"
-import {  IUser, RPUser } from "models"
+import { IUser, RPUser } from "models"
 import { api } from "config/config"
 import { Fetch } from "utils/fetch"
 
@@ -47,7 +47,6 @@ export function* authorize(data) {
 }
 interface IUserInfoResponse extends IUser { }
 export const getUserInfo = async (): Promise<IUserInfoResponse> => {
-    try {
         const response = await Fetch.Get<IUserInfoResponse>(api.userInfo.url)
 
         if (response?.code === 200) {
@@ -55,10 +54,7 @@ export const getUserInfo = async (): Promise<IUserInfoResponse> => {
         } else {
             throw response
         }
-    } catch (error) {
-        console.log("getUserInfo", error)
-        throw error
-    }
+
 }
 export interface GenAccessTokenResponse {
     access_token: string
@@ -85,26 +81,22 @@ export const genAccessToken = async (code: string) => {
     }
 }
 
-export const login = async (user_name: string,pass_word:string) => {
+export const login = async (email: string, password: string) => {
     const url = api.createAccount.url
     const body = {
-        user_name: user_name,
-        pass_word:pass_word,
+        email: email,
+        password: password,
     }
-    try {
-        const response = await Fetch.Post<RPUser>(url,body)
+        const response = await Fetch.Post<RPUser>(url, body)
         if (response?.code === 200) {
 
-            localStorage.setItem("token",response?.data?.token)   
+            localStorage.setItem("token", response?.data?.token)
             return response?.data
         } else {
             throw response?.code_message_value ?? response?.message
         }
-    } catch (error) {
-        console.log("getPermissionInfo", error)
-        throw error
-    }
 }
+
 export function* setAuthWatcher() {
     console.log("setAuthWatcher")
     yield takeEvery(AuthActionTypes.AUTHORIZE_ACTION, authorize)
