@@ -8,7 +8,9 @@ import Visibility from '@mui/icons-material/Visibility';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import validator from 'validator';
-import { login } from 'store/Auth/sagas';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { login } from 'utils/apis/authentication';
 
 function Login() {
   const navigate = useNavigate();
@@ -67,9 +69,13 @@ function Login() {
       setErrors((err) => ({ ...err, password: "Vui lòng nhập mật khẩu" }));
     }
     let res = await login(inputs.email, inputs.password)
-    console.log(res)
-  };
-
+    if (res.code !== 200) {
+      toast.error(res.message)
+    } else {
+      toast.success('Đăng nhập thành công')
+      window.setTimeout(() => { navigate('/home') }, 1000)
+    }
+  }
   const handleClickShowPassword = () => setShow((show) => !show);
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -77,6 +83,7 @@ function Login() {
   };
   return (
     <div className='register'>
+      <ToastContainer />
       <form className='register-form' style={{ minHeight: '300px' }}>
         <div className='form-close'>
           <FontAwesomeIcon icon={faXmark} />

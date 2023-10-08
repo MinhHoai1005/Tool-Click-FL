@@ -14,9 +14,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import { Link, Typography } from '@mui/material';
 import { register } from 'utils/apis/authentication';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom'
 
 export const Register = () => {
+
+    const navigate = useNavigate();
 
     const [inputs, setInputs] = useState({
         user_name: '',
@@ -39,7 +43,7 @@ export const Register = () => {
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setInputs((inputs) => ({ ...inputs, [name]: value }));
-        if (errors.user_name != "") {
+        if (errors.user_name !== "") {
             if (inputs.user_name === '') {
                 setErrors((err) => ({ ...err, user_name: "Vui lòng nhập tên tài khoản" }));
             } else {
@@ -92,7 +96,12 @@ export const Register = () => {
             return
         }
         let res = await register(inputs.user_name, inputs.email, inputs.phone, inputs.password)
-        // console.log(res)
+        if (res.code == 200) {
+            toast.success('Đăng ký thành công')
+            window.setTimeout(() => { navigate('/login-toolplus') }, 1000)
+        } else {
+            toast.error(res.message)
+        }
     };
 
     const handleClickShowEnterPassword = () =>
@@ -112,6 +121,7 @@ export const Register = () => {
 
     return (
         <div className='register'>
+            <ToastContainer />
             <form className='register-form'>
                 <div className='form-close'>
                     <FontAwesomeIcon icon={faXmark} />
@@ -153,7 +163,7 @@ export const Register = () => {
                     }
                     variant="standard"
                     fullWidth
-                    name="email"
+                    name="phone"
                     onInput={handleInput}
 
                 />

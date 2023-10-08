@@ -2,7 +2,7 @@
 import { takeEvery, put, call, all } from "redux-saga/effects"
 import { AuthActionTypes } from "./types"
 import { setItemLocalStorage, sleep } from "../../utils"
-import { IUser, RPUser } from "models"
+import { IUser } from "models"
 import { api } from "config/config"
 import { Fetch } from "utils/fetch"
 
@@ -80,23 +80,6 @@ export const genAccessToken = async (code: string) => {
         throw error
     }
 }
-
-export const login = async (email: string, password: string) => {
-    const url = api.createAccount.url
-    const body = {
-        email: email,
-        password: password,
-    }
-        const response = await Fetch.Post<RPUser>(url, body)
-        if (response?.code === 200) {
-
-            localStorage.setItem("token", response?.data?.token)
-            return response?.data
-        } else {
-            throw response?.code_message_value ?? response?.message
-        }
-}
-
 export function* setAuthWatcher() {
     console.log("setAuthWatcher")
     yield takeEvery(AuthActionTypes.AUTHORIZE_ACTION, authorize)

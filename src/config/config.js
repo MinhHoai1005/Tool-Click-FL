@@ -14,6 +14,9 @@ export const api = {
   createAccount: {
     url: domainWeb + 'account/create',
   },
+  loginAccount: {
+    url: domainWeb + 'account/login',
+  },
   genAccessToken: {
     url: domainWeb + '/cost/public-api/gen-access-token',
   },

@@ -1,8 +1,9 @@
+/* eslint-disable eqeqeq */
 /*eslint no-throw-literal: "off"*/
 import { Fetch } from "../fetch"
 import { api } from "../../config/config"
 import { RPUser } from "models"
-import Components from "components/Common"
+import { setItemLocalStorage } from "utils"
 
 export const register = async (user_name: string, email: string, phone: string, password: string) => {
     const url = api.createAccount.url
@@ -12,17 +13,20 @@ export const register = async (user_name: string, email: string, phone: string, 
         phone: phone,
         password: password,
     }
-    try {
-        const response = await Fetch.Post<RPUser>(url, body)
-        if (response?.code === 200) {
+    const response = await Fetch.Post<RPUser>(url, body)
+    return response
+}
 
-            localStorage.setItem("token", response?.data?.token)
-            return response?.data
-        } else {
-            throw response?.code_message_value ?? response?.message
-        }
-    } catch (error) {
-        Components.notify("Có lỗi khi chạy api lấy thông tin khách hàng ", "error")
-        throw error
+export const login = async (email: string, password: string) => {
+    const url = api.loginAccount.url
+    const body = {
+        email: email,
+        password: password,
     }
+    const response = await Fetch.Post<RPUser>(url, body)
+    if (response.code == 200) {
+        setItemLocalStorage("token", response.data.token)
+        setItemLocalStorage("user", JSON.stringify(response.data.data))
+    }
+    return response
 }

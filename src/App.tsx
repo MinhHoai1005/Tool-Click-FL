@@ -13,6 +13,7 @@ import HomeLogin from "features/auth/pages/HomeLogin"
 import Login from "features/auth/pages/Login"
 import { Register } from "features/auth/pages/Register"
 import { Route, Routes } from "react-router-dom"
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   useEffect(() => {
