@@ -4,6 +4,7 @@ import { Fetch } from "../fetch"
 import { api } from "../../config/config"
 import { RPUser } from "models"
 import { setItemLocalStorage } from "utils"
+import { User } from "@firebase/auth"
 
 export const register = async (user_name: string, email: string, phone: string, password: string) => {
     const url = api.createAccount.url
@@ -22,6 +23,32 @@ export const login = async (email: string, password: string) => {
     const body = {
         email: email,
         password: password,
+    }
+    const response = await Fetch.Post<RPUser>(url, body)
+    if (response.code == 200) {
+        setItemLocalStorage("token", response.data.token)
+        setItemLocalStorage("user", JSON.stringify(response.data.data))
+    }
+    return response
+}
+
+export const loginFacebook = async (user:User) => {
+    const url = api.loginFacebook.url
+    const body = {
+        user: user,
+    }
+    const response = await Fetch.Post<RPUser>(url, body)
+    console.log(response)
+    // if (response.code == 200) {
+    //     setItemLocalStorage("token", response.data.token)
+    //     setItemLocalStorage("user", JSON.stringify(response.data.data))
+    // }
+    return response
+}
+export const loginGamil = async (user:User) => {
+    const url = api.loginGmail.url
+    const body = {
+        user: user,
     }
     const response = await Fetch.Post<RPUser>(url, body)
     if (response.code == 200) {

@@ -17,6 +17,12 @@ export const api = {
   loginAccount: {
     url: domainWeb + 'account/login',
   },
+  loginFacebook: {
+    url: domainWeb + 'account/login-facebook',
+  },
+  loginGmail: {
+    url: domainWeb + 'account/login-gmail',
+  },
   genAccessToken: {
     url: domainWeb + '/cost/public-api/gen-access-token',
   },

@@ -10,7 +10,8 @@ import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } fr
 import { Firebase } from 'config/config'
 import { useNavigate } from 'react-router-dom'
 import { Link, Typography } from '@mui/material'
-
+import { loginFacebook ,loginGamil} from 'utils/apis/authentication'
+import { ToastContainer, toast } from 'react-toastify';
 
 const app = initializeApp(Firebase);
 const auth = getAuth(app);
@@ -25,19 +26,24 @@ function HomeLogin() {
         try {
             const result = await signInWithPopup(auth, providerfb);
             console.log('Đăng nhập thành công!', result);
+            console.log( result.user);
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);
         }
     };
     const handleGoogleLogin = async () => {
-        console.log(111)
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            console.log('Đăng nhập thành công:', user);
-            // navigate('/admin');
+            let res = await loginGamil(user)
+            if (res.code !== 200) {
+              toast.error(res.message)
+            } else {
+              toast.success('Đăng nhập thành công')
+              window.setTimeout(() => { navigate('/home') }, 1000)
+            }
         } catch (error) {
-            console.error('Lỗi đăng nhập:', error);
+            toast.error('Lỗi đăng nhập:', error)
         }
     };
 
@@ -46,6 +52,7 @@ function HomeLogin() {
     }
     return (
         <div className='home-login'>
+                  <ToastContainer />
             <form className='home-login-form'>
                 <div className='form-close'>
                     <FontAwesomeIcon icon={faXmark} />
