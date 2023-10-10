@@ -80,7 +80,9 @@ features: /admin/dashbord
 features: /admin/setting
 
 features: auth / authentication
-- login
+- login 
+    Login ToolPlus  -done
+    Login ToolPlus  -gmail
 - sing up / register
 - forget password
 
