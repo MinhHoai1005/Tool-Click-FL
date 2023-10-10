@@ -10,7 +10,7 @@ import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } fr
 import { Firebase } from 'config/config'
 import { useNavigate } from 'react-router-dom'
 import { Link, Typography } from '@mui/material'
-import { loginFacebook ,loginGamil} from 'utils/apis/authentication'
+import { loginFacebook ,loginGmail} from 'utils/apis/authentication'
 import { ToastContainer, toast } from 'react-toastify';
 
 const app = initializeApp(Firebase);
@@ -35,7 +35,7 @@ function HomeLogin() {
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            let res = await loginGamil(user)
+            let res = await loginFacebook(user)
             if (res.code !== 200) {
               toast.error(res.message)
             } else {

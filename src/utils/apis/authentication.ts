@@ -38,14 +38,13 @@ export const loginFacebook = async (user:User) => {
         user: user,
     }
     const response = await Fetch.Post<RPUser>(url, body)
-    console.log(response)
-    // if (response.code == 200) {
-    //     setItemLocalStorage("token", response.data.token)
-    //     setItemLocalStorage("user", JSON.stringify(response.data.data))
-    // }
+    if (response.code == 200) {
+        setItemLocalStorage("token", response.data.token)
+        setItemLocalStorage("user", JSON.stringify(response.data.data))
+    }
     return response
 }
-export const loginGamil = async (user:User) => {
+export const loginGmail = async (user:User) => {
     const url = api.loginGmail.url
     const body = {
         user: user,
