@@ -13,6 +13,7 @@ import { Link, Typography } from '@mui/material'
 import { loginFacebook ,loginGmail} from 'utils/apis/authentication'
 import { ToastContainer, toast } from 'react-toastify';
 
+
 const app = initializeApp(Firebase);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -35,7 +36,7 @@ function HomeLogin() {
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            let res = await loginFacebook(user)
+            let res = await loginGmail(user)
             if (res.code !== 200) {
               toast.error(res.message)
             } else {
