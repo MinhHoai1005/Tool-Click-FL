@@ -32,7 +32,7 @@ export const login = async (email: string, password: string) => {
     return response
 }
 
-export const loginFacebook = async (user:User) => {
+export const loginFacebook = async (user: User) => {
     const url = api.loginFacebook.url
     const body = {
         user: user,
@@ -44,7 +44,7 @@ export const loginFacebook = async (user:User) => {
     }
     return response
 }
-export const loginGmail = async (user:User) => {
+export const loginGmail = async (user: User) => {
     const url = api.loginGmail.url
     const body = {
         user: user,
@@ -54,5 +54,22 @@ export const loginGmail = async (user:User) => {
         setItemLocalStorage("token", response.data.token)
         setItemLocalStorage("user", JSON.stringify(response.data.data))
     }
+    return response
+}
+export const forgotPasswordSendEmail = async (email: string) => {
+    const url = api.forgotPasswordSendEmail.url
+    const body = {
+        email: email,
+    }
+    const response = await Fetch.Post<RPUser>(url, body)
+    return response
+}
+export const forgotPassword = async (id?: string, password?: string) => {
+    const url = api.forgotPassword.url
+    const body = {
+        client_id: id,
+        password: password,
+    }
+    const response = await Fetch.Post<RPUser>(url, body)
     return response
 }

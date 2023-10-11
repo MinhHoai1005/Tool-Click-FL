@@ -40,8 +40,8 @@ function App() {
           </Route>
           <Route path='/login-toolplus' element={<Login></Login>} />
           <Route path='/register' element={<Register />} />
+          <Route path='/forgot-password/:id' element={<ForgotPassword />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
-
           <Route path='/login' element={<HomeLogin />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

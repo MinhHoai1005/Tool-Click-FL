@@ -23,6 +23,12 @@ export const api = {
   loginGmail: {
     url: domainWeb + 'account/login-gmail',
   },
+  forgotPasswordSendEmail: {
+    url: domainWeb + 'account/forgot-password-sendemail',
+  },
+  forgotPassword: {
+    url: domainWeb + 'account/forgot-password',
+  },
   genAccessToken: {
     url: domainWeb + '/cost/public-api/gen-access-token',
   },
