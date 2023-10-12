@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Admin } from './data';
 import { Header } from './Header';
 import Sidebar from './Sidebar';
-
+import { ToastContainer } from 'react-toastify';
 
 
 const drawerWidth: number = 240;
@@ -19,6 +19,7 @@ export const AdminLayout = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
+      <ToastContainer />
       <CssBaseline />
       <Header drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
       <Sidebar data={Admin} disable={false} />

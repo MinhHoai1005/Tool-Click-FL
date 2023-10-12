@@ -10,3 +10,11 @@ export function sleep(time): Promise<void> {
 export const setItemLocalStorage = (key, value) => {
     localStorage.setItem(key, value)
 }
+
+export const formatIntToString = (numStr: string) => {
+    if (numStr.length === 0) {
+        return 0
+    }
+    numStr = numStr.replaceAll(',', "")
+    return parseInt(numStr, 10)
+}

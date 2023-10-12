@@ -23,3 +23,8 @@ export interface ActionDialog {
     span: string
     onAgree: Function
 }
+export interface Response{
+    code: number,
+    message: string,
+    data: any,
+}
