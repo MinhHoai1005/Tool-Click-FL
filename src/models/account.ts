@@ -12,7 +12,7 @@ export interface RPAccount {
     data: IAccount[]
 }
 export interface IAccount {
-    id: string,
+    _id: string,
     client_id: number,
     user_name: string,
     email: string,

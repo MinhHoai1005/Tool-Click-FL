@@ -135,6 +135,79 @@ export class Fetch {
             return error?.response?.data
         }
     }
+    public static async PostFile<T>(
+        url: string,
+        data: FormData,
+        headers: object = {},
+        isCache: boolean = false,
+        handleProgress: Function = () => { },
+        cancelToken: any = null
+    ): Promise<IResponse<T>> {
+        const token = localStorage.getItem("token")
+        const defaultHeaders = {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+            Token: token,
+        }
+
+        const onUploadProgress = (progressEvent: any) => {
+            handleProgress(progressEvent)
+        }
+
+        const request = {
+            url: url,
+            method: "POST" as Method,
+            data: data,
+            headers: { ...defaultHeaders, ...headers },
+            cancelToken,
+            onUploadProgress,
+        }
+        const keyCache = JSON.stringify(request)
+
+        try {
+            if (isCache) {
+                const { result, wait } = await CacheManager.wait<IResponse<T>>(keyCache)
+
+                if (result) return result
+
+                if (wait) {
+                    const data = await CacheManager.get<IResponse<T>>(keyCache)
+                    return data
+                }
+            }
+
+            const response = await axios.request<IResponse<T>>(request)
+
+            const responseData = response?.data
+
+            if (isCache) CacheManager.set<IResponse<T>>(keyCache, responseData)
+
+            return responseData
+        } catch (error) {
+            if (isCache) CacheManager.error(keyCache, error)
+
+
+            if (error.message === "Network Error") {
+                return Promise.resolve({
+                    code: 400,
+                    message: "Lỗi mạng. Vui lòng kiểm tra và thử lại",
+                    data: null,
+                    code_message: "400",
+                    code_message_value: "Lỗi mạng. Vui lòng kiểm tra và thử lại",
+                }) as unknown as Promise<IResponse<T>>
+            }
+
+            if (error?.response?.data?.code === 401) {
+                removeItemLocalStorage("token")
+                removeItemLocalStorage("user")
+                window.location.href = `/login?previous_path=${encodeURIComponent(
+                    window.location.pathname + window.location.search
+                )}`
+            }
+
+            return error?.response?.data
+        }
+    }
     public static async Put<T>(
         url: string,
         data: object = {},

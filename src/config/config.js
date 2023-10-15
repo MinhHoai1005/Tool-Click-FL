@@ -52,4 +52,16 @@ export const api = {
   userInfo: {
     url: domainWeb + '/cost/public-api/employee/info',
   },
+
+  //Category
+  createCategory: {
+    url: domainWeb + 'category/create',
+  },
+  getAllCategory: {
+    url: domainWeb + 'category/getall',
+  },
+  //File
+  uploadFile: {
+    url: domainWeb + 'middlewares/uploadfile',
+  },
 };

@@ -28,3 +28,22 @@ export interface Response{
     message: string,
     data: any,
 }
+export interface IUploadFileResponse {
+    is_err: boolean
+    is_exist: boolean
+    http_status: number
+    mgs_err: string
+    file_name: string
+    data: IFile
+}
+export interface IFile {
+    _id: string
+    bucket: string
+    source: string
+    file_name: string
+    file_path: string
+    public_file_path: string
+    content_type: string
+    size: string
+    status: string
+}

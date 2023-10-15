@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Button, CssBaseline, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, TextField, TablePagination } from '@mui/material'
+import { Box, Button, CssBaseline, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, TextField, TablePagination, Autocomplete } from '@mui/material'
 import { IMoney, IAccount } from 'models';
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { toast } from 'react-toastify';
 import { DialogMoney } from 'components/Common';
 import { getMoney, switchStatusMoney } from 'utils/apis/money';
-import { getAllAccountMoney } from 'utils/apis/account';
+import { getAllAccount } from 'utils/apis/account';
 
 interface Column {
   id: string;
@@ -26,7 +26,7 @@ const columns: Column[] = [
 ];
 export const Money = () => {
 
-  const [keyword, setKeyWord] = useState<string>('');
+  const [client_id, setClientId] = useState<number>(0);
   const [page, setPage] = useState<number>(0)
   const [rowsPerPage, setRowsPerPage] = useState<number>(10)
   const [rows, setRows] = useState<IMoney[]>([]);
@@ -40,32 +40,32 @@ export const Money = () => {
   const handleChangeRowsPerPage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-    loadMoney(keyword, 0, +event.target.value);
+    loadMoney(client_id, 0, +event.target.value);
 
   };
 
-  const loadMoney = async (keyword: string, page: number, rowsPerPage: number) => {
-    let data = await getMoney(keyword, page, rowsPerPage)
+  const loadMoney = async (client_id: number, page: number, rowsPerPage: number) => {
+    let data = await getMoney(client_id, page, rowsPerPage)
     if (data.code === 200) {
       setRows(data.data.data)
     }
   }
-  const loadAccount = async () => {
-    let data = await getAllAccountMoney("")
+  const loadAccount = async (client_id:number) => {
+    let data = await getAllAccount(client_id,0,100)
     if (data.code === 200) {
-      setAccounts(data.data.data)
+      setAccounts(data.data)
     }
   }
   useEffect(() => {
-    loadMoney(keyword, page, rowsPerPage)
-    loadAccount()
+    loadMoney(client_id, page, rowsPerPage)
+    loadAccount(0)
   }, [])
 
   const onSwitchStatus = async (id: string, status: number) => {
     let data = await switchStatusMoney(id, status)
     if (data.code === 200) {
       toast.success('Thay đổi trạng thái thành công')
-      loadMoney(keyword, page, rowsPerPage)
+      loadMoney(client_id, page, rowsPerPage)
     } else {
       toast.error(data.message)
     }
@@ -73,16 +73,22 @@ export const Money = () => {
   const showDialog = () => {
     setOpen(!open);
   }
+  const handleChange = (event, newValue) => {
+    loadMoney(newValue?.client_id,page,rowsPerPage)
+  };
   return (
     <Box sx={{ m: 2, borderRadius: '1px' }} className='admin-account'>
       <CssBaseline />
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography>Lịch sử nạp tiền</Typography>
-        <TextField value={keyword} label="Tìm kiếm người dùng" variant="standard"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setKeyWord(event.target.value);
-            loadMoney(event.target.value, page, rowsPerPage)
-          }} />
+        <Autocomplete
+          onChange={handleChange}
+          id="searchable-select"
+          options={accounts === undefined ? [] : accounts}
+          getOptionLabel={(option) => `${option.client_id} - ${option.user_name}`}
+          renderInput={(params) => <TextField {...params} label="Người dùng" />}
+          sx={{width: '50%'}}
+        />
         <Button onClick={showDialog}>Nạp tiền</Button>
       </Box>
       <Box>

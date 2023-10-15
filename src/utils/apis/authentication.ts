@@ -2,7 +2,7 @@
 /*eslint no-throw-literal: "off"*/
 import { Fetch } from "../fetch"
 import { api } from "../../config/config"
-import { RPUser } from "models"
+import { RPUser, IUploadFileResponse } from "models"
 import { setItemLocalStorage } from "utils"
 import { User } from "@firebase/auth"
 
@@ -71,5 +71,22 @@ export const forgotPassword = async (id?: string, password?: string) => {
         password: password,
     }
     const response = await Fetch.Post<RPUser>(url, body)
+    return response
+}
+
+export const uploadFile = async (file: File, handleProgress?: Function, cancelToken?: any) => {
+    const url = api.uploadFile.url
+    console.log(file)
+    const formData = new FormData();
+    formData.append('file', file);
+    console.log(formData.append)
+    const response = await Fetch.PostFile<IUploadFileResponse[]>(
+        `${url}`,
+        formData,
+        {},
+        false,
+        handleProgress,
+        cancelToken
+    )
     return response
 }

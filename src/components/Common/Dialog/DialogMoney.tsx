@@ -53,7 +53,7 @@ export const DialogMoney: React.FC<DialogMoneyProps> = (props) => {
                 <Autocomplete
                     onChange={handleChange}
                     id="searchable-select"
-                    options={rows}
+                    options={rows === undefined ? [] : rows}
                     getOptionLabel={(option) => `${option.client_id} - ${option.user_name}`}
                     renderInput={(params) => <TextField {...params} label="Người dùng" />}
                 />

@@ -12,7 +12,7 @@ export const moneyAddByAdmin = async (id: number | null | string, total: number)
     const response = await Fetch.Post<Response>(url, body)
     return response
 }
-export const getMoney = async (client_id: string, page: number, page_size: number) => {
+export const getMoney = async (client_id: number, page: number, page_size: number) => {
     const url = api.getAllMoney.url
     const body = {
         client_id: client_id,

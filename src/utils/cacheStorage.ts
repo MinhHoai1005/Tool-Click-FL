@@ -17,11 +17,11 @@ export const CacheManager = {
             }
 
             if (this.blockList.get(key)) {
-                return resolve({ result: null as T, wait: true })
+                return resolve({ result: null as unknown as T, wait: true })
             }
 
             this.blockList.set(key, true)
-            return resolve({ result: null as T, wait: false })
+            return resolve({ result: null as unknown as T, wait: false })
         })
     },
 
