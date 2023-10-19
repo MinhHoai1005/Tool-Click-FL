@@ -8,13 +8,14 @@ import { NotFound } from "components/Common"
 import PrivateRoutes from "components/Common/PrivateRoutes"
 import { AdminLayout, UserLayout } from "components/Layout"
 import { Account, Category, Money, Setting } from "features/admin"
-import { ForgotPassword } from "features/auth/pages/ForgotPassword"
-import HomeLogin from "features/auth/pages/HomeLogin"
-import Login from "features/auth/pages/Login"
-import { Register } from "features/auth/pages/Register"
+import { ForgotPassword } from "features/auth/ForgotPassword"
+import HomeLogin from "features/auth/HomeLogin"
+import Login from "features/auth/Login"
+import { Register } from "features/auth/Register"
 import { Route, Routes } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Post } from 'features/layout';
+import { Recharge, History, HomeUser } from 'features/home';
 function App() {
   useEffect(() => {
     // accountApi.create().then((response) => console.log(response))
@@ -26,16 +27,20 @@ function App() {
         <Routes>
           <Route element={<PrivateRoutes />}>
             {/* User */}
-            <Route element={<UserLayout />} path="/" />
-            <Route element={<UserLayout />} path="/home" />
-            <Route element={<UserLayout />} path="/recharge" />
-            <Route element={<UserLayout />} path="/history" />
+            <Route path="/" element={<UserLayout />} >
+              <Route path="home" element={<HomeUser />} />
+              <Route path="recharge" element={<Recharge />} />
+              <Route path="history" element={<History />} />
+              <Route path="layout" element={<Post />} />
+            </Route>
             {/* Admin */}
             <Route path='/admin' element={<AdminLayout></AdminLayout>} >
               <Route path="account" element={<Account />} />
               <Route path="category" element={<Category />} />
               <Route path="money" element={<Money />} />
-              <Route path="setting" element={<Setting />} />
+              <Route path="setting" element={<Setting />} >
+                <Route path="happy" element={<HomeUser />} />
+              </Route>
             </Route>
           </Route>
           <Route path='/login-toolplus' element={<Login></Login>} />

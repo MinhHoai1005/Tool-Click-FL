@@ -32,7 +32,9 @@ export const AdminLayout = () => {
           <Route path="account" element={<Account />} />
           <Route path="category" element={<Category />} />
           <Route path="money" element={<Money />} />
-          <Route path="setting" element={<Setting />} />
+          <Route path="setting" element={<></> } >
+            <Route path="happy" element={<Setting />} />
+          </Route>
         </Routes>
 
       </Box>

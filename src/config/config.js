@@ -57,8 +57,23 @@ export const api = {
   createCategory: {
     url: domainWeb + 'category/create',
   },
+  updateCategory: {
+    url: domainWeb + 'category/update',
+  },
   getAllCategory: {
     url: domainWeb + 'category/getall',
+  },
+  deleteCategory: {
+    url: domainWeb + 'category/delete',
+  },
+  getDetailCategory: {
+    url: domainWeb + 'category/detail',
+  },
+  deleteChildrenCategory: {
+    url: domainWeb + 'category/children/delete',
+  },
+  updateChildrenCategory:{
+    url: domainWeb + 'category/children/update',
   },
   //File
   uploadFile: {

@@ -2,12 +2,12 @@ export interface ICategory {
     _id: string,
     name: string,
     url: string,
-    image: number,
+    image: string,
     children?: IChildren[]
 }
 export interface IChildren {
     id: string,
     name: string,
     url: string,
-    image: number,
+    image: string,
 }
