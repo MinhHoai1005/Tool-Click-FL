@@ -39,7 +39,6 @@ function App() {
               <Route path="category" element={<Category />} />
               <Route path="money" element={<Money />} />
               <Route path="setting" element={<Setting />} >
-                <Route path="happy" element={<HomeUser />} />
               </Route>
             </Route>
           </Route>

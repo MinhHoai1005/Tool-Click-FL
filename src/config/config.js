@@ -75,6 +75,19 @@ export const api = {
   updateChildrenCategory:{
     url: domainWeb + 'category/children/update',
   },
+  //Setting
+  createSetting:{
+    url: domainWeb + 'setting/create',
+  },
+  updateSetting:{
+    url: domainWeb + 'setting/update',
+  },
+  deleteSetting:{
+    url: domainWeb +'setting/delete',
+  },
+  getAllSetting:{
+    url: domainWeb + 'setting/getall',
+  },
   //File
   uploadFile: {
     url: domainWeb + 'middlewares/uploadfile',

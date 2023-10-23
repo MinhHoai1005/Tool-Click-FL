@@ -4,3 +4,4 @@ export * from './customReduxRouter'
 export * from './Dialog/DialogMoney';
 export * from './customReduxRouter';
 export * from './Dialog/DialogCategory';
+export * from './Dialog/DialogSetting';

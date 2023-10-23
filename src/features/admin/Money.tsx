@@ -50,8 +50,8 @@ export const Money = () => {
       setRows(data.data.data)
     }
   }
-  const loadAccount = async (client_id:number) => {
-    let data = await getAllAccount(client_id,0,100)
+  const loadAccount = async (client_id: number) => {
+    let data = await getAllAccount(client_id, 0, 100)
     if (data.code === 200) {
       setAccounts(data.data)
     }
@@ -74,7 +74,7 @@ export const Money = () => {
     setOpen(!open);
   }
   const handleChange = (event, newValue) => {
-    loadMoney(newValue?.client_id,page,rowsPerPage)
+    loadMoney(newValue?.client_id, page, rowsPerPage)
   };
   return (
     <Box sx={{ m: 2, borderRadius: '1px' }} className='admin-account'>
@@ -87,7 +87,7 @@ export const Money = () => {
           options={accounts === undefined ? [] : accounts}
           getOptionLabel={(option) => `${option.client_id} - ${option.user_name}`}
           renderInput={(params) => <TextField {...params} label="Người dùng" />}
-          sx={{width: '50%'}}
+          sx={{ width: '50%' }}
         />
         <Button onClick={showDialog}>Nạp tiền</Button>
       </Box>

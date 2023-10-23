@@ -95,19 +95,7 @@ export const Admin = [
     id: 4,
     name: 'Cài đặt',
     icon: <SettingsIcon />,
-    children: [
-      {
-        id: 41,
-        name: 'Danh sách cảm xúc',
-        icon: <StorageIcon />,
-        url: 'setting/happy',
-      },
-      // {
-      //   id: 42,
-      //   name: 'Giao diện',
-      //   icon: <DnsIcon />,
-      //   url: 'setting/happy',
-      // },
-    ],
+    url: '/admin/setting',
+    children: [],
   },
 ];
