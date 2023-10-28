@@ -13,14 +13,13 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import './style.scss'
 import toolplus from 'images/icon/toolplus.png'
-import { Menu } from './data'
 import { useNavigate } from 'react-router-dom';
-import { MenuSidebar } from 'models';
+import { ICategory } from 'models';
 
 const drawerWidth = 240;
 
 interface Props {
-    data: MenuSidebar[]
+    data: ICategory[]
     window?: () => Window;
     disable: boolean
 }
@@ -29,18 +28,18 @@ export default function Sidebar(props: Props) {
     const { window, data, disable } = props;
     const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [open, setOpen] = React.useState<number>(0);
+    const [open, setOpen] = React.useState<string>('');
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
-    const handleClick = (id: number, url: string | undefined) => {
-        if (url !== undefined) {
+    const handleClick = (id: string, url: string ) => {
+        if (url !== '') {
             navigate(url);
         } else {
             if (id === open) {
-                setOpen(0);
+                setOpen('');
             } else {
                 setOpen(id);
             }
@@ -57,30 +56,30 @@ export default function Sidebar(props: Props) {
             <Divider />
             <List>
                 {data.map((item) => (
-                    <div key={item.id}>
+                    <div key={item._id}>
                         <ListItem disablePadding >
-                            <ListItemButton onClick={() => handleClick(item.id, item.url)}>
+                            <ListItemButton onClick={() => handleClick(item._id, item.url)}>
                                 <ListItemIcon>
-                                    {item.img === undefined ? item.icon : <img src={item.img} alt={item.name} />}
+                                    <img src={item.image} alt={item.name} />
                                 </ListItemIcon>
 
                                 <ListItemText primary={item.name} />
-                                {!disable && (
+                                {disable && (
                                     <ListItemIcon>
-                                        {item.url !== undefined ? "" : open === item.id ? <ExpandLess /> : <ExpandMore />}
+                                        {item.url !== '' ? "" : open === item._id ? <ExpandLess /> : <ExpandMore />}
                                     </ListItemIcon>
                                 )}
 
                             </ListItemButton>
                         </ListItem>
-                        <Collapse in={open === item.id ? true : false} timeout="auto" unmountOnExit >
-                            {item.children.map((children) => (
-                                <List component="div" disablePadding key={children.id}>
-                                    <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickLink(children.url)}>
+                        <Collapse in={open === item._id ? true : false} timeout="auto" unmountOnExit >
+                            { item.children.map((child) => (
+                                <List component="div" disablePadding key={child.id}>
+                                    <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickLink(child.url)}>
                                         <ListItemIcon>
-                                            {children.icon}
+                                        <img src={child.image} alt={child.name} />
                                         </ListItemIcon>
-                                        <ListItemText primary={children.name} />
+                                        <ListItemText primary={child.name} />
                                     </ListItemButton>
                                 </List>
                             ))}

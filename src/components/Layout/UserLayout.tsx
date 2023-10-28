@@ -5,30 +5,72 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { Header } from './Header';
 import Sidebar from './Sidebar';
 import { Recharge, History, HomeUser } from 'features/home';
-import { Menu } from './data'
 import { Route, Routes } from 'react-router-dom';
 import { Setting } from 'features/admin';
 import { Toolbar } from '@mui/material';
 import { Post } from 'features/layout';
+import { getAllCategory } from 'utils/apis/category';
+import { ICategory } from 'models';
 
 const drawerWidth: number = 240;
 
 export interface UserLayoutProps {
 }
+
 export function UserLayout(props: UserLayoutProps) {
+
+  const [menus, setMenus] = useState<ICategory[]>()
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [tabView, setTabView] = useState<string>("home")
+  const [sidebar, setSidebar] = useState([{
+    _id: "1",
+    name: 'Home',
+    image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fhome.svg?alt=media&token=8ba4c82c-e3e6-4bdb-9638-1a8cf04a7956&_gl=1*dct06h*_ga*NTg1ODg5MjYyLjE2Njk5ODM1NTg.*_ga_CW55HF8NVT*MTY5ODQ3Njc5Mi4zNS4xLjE2OTg0NzY5MDguMTUuMC4w',
+    url: '',
+    children: [
+      {
+        id: "11",
+        name: 'Trang chủ',
+        url: '/home',
+        image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fhome.svg?alt=media&token=8ba4c82c-e3e6-4bdb-9638-1a8cf04a7956&_gl=1*dct06h*_ga*NTg1ODg5MjYyLjE2Njk5ODM1NTg.*_ga_CW55HF8NVT*MTY5ODQ3Njc5Mi4zNS4xLjE2OTg0NzY5MDguMTUuMC4w',
+      },
+      {
+        id: "12",
+        name: 'Nạp tiền',
+        url: '/recharge',
+        image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fwallet.svg?alt=media&token=763ef16f-02a5-4d38-8491-547d06a0c4ee&_gl=1*vr4ps6*_ga*NTg1ODg5MjYyLjE2Njk5ODM1NTg.*_ga_CW55HF8NVT*MTY5ODQ3Njc5Mi4zNS4xLjE2OTg0NzcwMDYuNTMuMC4w',
+      },
+      {
+        id: "13",
+        name: 'Lịch sử hoạt động',
+        url: '/history',
+        image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fhistory.svg?alt=media&token=b3c3b636-e274-4e81-8e48-ea2730ce19df&_gl=1*1d0kpkr*_ga*NTg1ODg5MjYyLjE2Njk5ODM1NTg.*_ga_CW55HF8NVT*MTY5ODQ3Njc5Mi4zNS4xLjE2OTg0NzY4NjguNTUuMC4w',
+      },
+    ],
+  },])
+
+  const loadMenu = async () => {
+    let data = await getAllCategory()
+    if (data.code === 200) {
+      setMenus(data.data)
+
+     console.log(data.data)
+    }
+  }
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
   useEffect(() => {
     setTabView(window.location.pathname)
+    loadMenu();
   }, [])
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Header drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
-      <Sidebar data={Menu} disable={false} />
+      <Sidebar data={sidebar} disable={true} />
       <Box
         component="main"
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
@@ -40,7 +82,15 @@ export function UserLayout(props: UserLayoutProps) {
           <Route path="history" element={<History />} />
           <Route path="setting" element={<Setting />} >
           </Route>
-          <Route path="layout" element={<Post />} />
+          {menus?.map((menu) => (
+            <React.Fragment key={menu._id}>
+              {menu.children !== null && menu.children !== undefined && menu.children.map((child) => (
+                <React.Fragment key={child.id}>
+                  <Route path={child.url} element={<Post />} />
+                </React.Fragment>
+              ))}
+            </React.Fragment>
+          ))}
         </Routes>
       </Box>
     </Box>

@@ -18,7 +18,7 @@ export const DialogCategory: React.FC<DialogCategoryProps> = (props) => {
     const [inputs, setInputs] = useState({
         name: '',
         url: '',
-        image: '',
+        image : '',
     });
 
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +81,7 @@ export const DialogCategory: React.FC<DialogCategoryProps> = (props) => {
                     setInputs({ name: res?.name, url: res?.url, image: res?.image })
                 }
             } else {
-                setInputs({ name: data.name, url: data.url, image: data.image })
+                setInputs({ name: data.name, url: data.url, image: data?.image })
             }
         }
     }, [data, child])

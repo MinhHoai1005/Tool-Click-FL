@@ -1,16 +1,17 @@
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
-import { CssBaseline, Box, Tab, Typography, IconButton, TableHead, TableRow, TableCell, Paper, TableBody, TableContainer, Table } from '@mui/material'
+import { CssBaseline, Box, Tab, Typography, IconButton, TableHead, TableRow, TableCell, Paper, TableBody, TableContainer, Table, TextField, Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { DialogSetting } from 'components/Common'
 import { ICategory, ISetting } from 'models'
-import { getAllSetting, deleteSetting } from 'utils/apis/setting'
+import { getAllSetting, deleteSetting, createPrice, getAllPrice } from 'utils/apis/setting'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { toast } from 'react-toastify'
 import { getAllCategory } from 'utils/apis/category'
-
+import './style.scss'
+import { formatIntToString } from 'utils'
 
 export const Setting = () => {
     //Tab
@@ -23,6 +24,8 @@ export const Setting = () => {
     const [data, setData] = useState<ISetting>()
     const [rows, setRows] = useState<ISetting[]>([])
     const [categorys, setCategorys] = useState<ICategory[]>([])
+    const [inputs, setInputs] = useState([]);
+
     const handleCloseDialog = () => {
         setOpen(!open)
     }
@@ -54,9 +57,30 @@ export const Setting = () => {
         if (data.code === 200) {
             setCategorys(data.data)
         }
+        let res = await getAllPrice()
+        if (res.code === 200) {
+            for (let i = 0; i < res.data[0].inputs.length; i++) {
+                // setInputs({ ...inputs, [name]:"0" })
+                let data ={
+                    [res.data[0].inputs[i].Key]:res.data[0].inputs[i].Value
+                }
+                // inputs.concat(data);
+            }
+            // setInputs(res.data[0].inputs)
+        }
     }
-    const addConfig = async () => {
-
+    const onChangeInput = async (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, id: string, child: string) => {
+        let { name, value } = e.target;
+        let number = formatIntToString(value)
+        setInputs((inputs) => ({ ...inputs, [name]: number }));
+    }
+    const addPrice = async () => {
+        let data = await createPrice(inputs)
+        if (data.code === 200) {
+            toast.success('Cập nhật cảm xúc thành công')
+        } else {
+            toast.error(data.message)
+        }
     }
     useEffect(() => {
         loadHappy()
@@ -64,7 +88,7 @@ export const Setting = () => {
     }, [])
 
     return (
-        <Box sx={{ m: 2, borderRadius: '1px' }} className='layout-post'>
+        <Box sx={{ m: 2, borderRadius: '1px' }} className='admin-setting'>
             <CssBaseline />
             <Box sx={{ width: '100%', typography: 'body1' }}>
                 <TabContext value={value}>
@@ -88,7 +112,11 @@ export const Setting = () => {
                         </IconButton>
                     </TabPanel>
                     <TabPanel value="2">
-                        <Typography>Danh sách bảng giá</Typography>
+                        <Box>
+                            <Typography>Danh sách bảng giá</Typography>
+                            <Button onClick={addPrice}>Add</Button>
+                        </Box>
+
                         <TableContainer component={Paper}>
                             <Table sx={{ minWidth: 700 }} aria-label="spanning table">
                                 <TableHead>
@@ -108,14 +136,28 @@ export const Setting = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    <TableRow >
-                                        <TableCell sx={{border:'1px solid'}}>Danh mục a</TableCell>
-                                        <TableCell align="left" sx={{border:'1px solid'}}>Danh mục b</TableCell>
-                                        {rows.map((row) => (
-                                            <TableCell align="right"sx={{border:'1px solid'}} key={row._id}></TableCell>
-                                        ))}
-                                        <TableCell align="right"sx={{border:'1px solid'}}>Tương tác</TableCell>
-                                    </TableRow>
+                                    {categorys.map((category) => (
+                                        <React.Fragment key={category._id}>
+                                            {category.children !== undefined && category.children.map((child) => (
+                                                <TableRow key={child.id}>
+
+                                                    <TableCell align="center" sx={{ border: '1px solid' }}>{category.name}</TableCell>
+                                                    <TableCell align="center" sx={{ border: '1px solid' }}>{child.name}</TableCell>
+                                                    {rows.map((row) => (
+                                                        <TableCell sx={{ border: '1px solid' }} key={row._id}>
+                                                            <TextField
+                                                                value={inputs[row._id + '-' + child.id] === undefined ? 0 : inputs[row._id + '-' + child.id].toLocaleString('en-US')}
+                                                                name={row._id + '-' + child.id}
+
+                                                                onChange={(e) => onChangeInput(e, row._id, child.id)} />
+                                                        </TableCell>
+                                                    ))}
+                                                    <TableCell align="right" sx={{ border: '1px solid' }}><TextField /></TableCell>
+                                                </TableRow>
+                                            ))}
+
+                                        </React.Fragment>
+                                    ))}
                                 </TableBody>
                             </Table>
                         </TableContainer>

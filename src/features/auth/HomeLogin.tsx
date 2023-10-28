@@ -10,7 +10,7 @@ import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } fr
 import { Firebase } from 'config/config'
 import { useNavigate } from 'react-router-dom'
 import { Link, Typography } from '@mui/material'
-import { loginFacebook ,loginGmail} from 'utils/apis/authentication'
+import { loginFacebook, loginGmail } from 'utils/apis/authentication'
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -27,7 +27,7 @@ function HomeLogin() {
         try {
             const result = await signInWithPopup(auth, providerfb);
             console.log('Đăng nhập thành công!', result);
-            console.log( result.user);
+            console.log(result.user);
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);
         }
@@ -38,10 +38,10 @@ function HomeLogin() {
             const user = result.user;
             let res = await loginGmail(user)
             if (res.code !== 200) {
-              toast.error(res.message)
+                toast.error(res.message)
             } else {
-              toast.success('Đăng nhập thành công')
-              window.setTimeout(() => { navigate('/home') }, 1000)
+                toast.success('Đăng nhập thành công')
+                window.setTimeout(() => { navigate('/home') }, 1000)
             }
         } catch (error) {
             toast.error('Lỗi đăng nhập:', error)
@@ -53,7 +53,7 @@ function HomeLogin() {
     }
     return (
         <div className='home-login'>
-                  <ToastContainer />
+            <ToastContainer />
             <form className='home-login-form'>
                 <div className='form-close'>
                     <FontAwesomeIcon icon={faXmark} />
@@ -68,13 +68,14 @@ function HomeLogin() {
                             Đăng nhập với ToolPlus
                         </h6>
                     </div>
-                    <div className="go btn btn-login login-with-facebook" onClick={signInWithFacebook} >
+                    {/* <div className="go btn btn-login login-with-facebook" onClick={signInWithFacebook} >
                         <div className='icon'>
                             <img src={facebook} alt='login-with-facebook' />
                         </div>
                         <h6>
                             Tiếp tục với Facebook
-                        </h6></div>
+                        </h6>
+                        </div> */}
                     <div className="fb btn btn-login login-with-gmail" onClick={handleGoogleLogin} >
                         <div className='icon'>
                             <img src={google} alt='login-with-google' />

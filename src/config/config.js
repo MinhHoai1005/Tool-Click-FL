@@ -88,6 +88,14 @@ export const api = {
   getAllSetting:{
     url: domainWeb + 'setting/getall',
   },
+  
+  //Price
+  createPrice:{
+    url: domainWeb + 'price/create',
+  },
+  getAllPrice:{
+    url: domainWeb + 'price/getall',
+  },
   //File
   uploadFile: {
     url: domainWeb + 'middlewares/uploadfile',

@@ -56,7 +56,6 @@ export const DialogSetting: React.FC<DialogSettingProps> = (props) => {
                 name: data.name,
                 image: data.image,
             });
-            console.log(data)
         }
     }, [data])
     return (

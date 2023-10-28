@@ -3,7 +3,7 @@ export interface ICategory {
     name: string,
     url: string,
     image: string,
-    children?: IChildren[]
+    children: IChildren[]
 }
 export interface IChildren {
     id: string,

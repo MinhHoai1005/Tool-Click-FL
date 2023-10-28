@@ -4,7 +4,7 @@ export interface ListResponse<T> {
     data: T[]
 }
 export interface MenuSidebar {
-    id: number,
+    _id: string,
     name: string,
     icon?: JSX.Element
     children: MenuChildren[]
@@ -12,7 +12,7 @@ export interface MenuSidebar {
     img?: string
 }
 export interface MenuChildren {
-    id: number,
+    id: string,
     name: string,
     icon?: JSX.Element
     url: string
