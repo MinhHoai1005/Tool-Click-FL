@@ -11,3 +11,7 @@ export interface IChildren {
     url: string,
     image: string,
 }
+export interface ICategoryId{
+    id: string,
+    url: string,
+}

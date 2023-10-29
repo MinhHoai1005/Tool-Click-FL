@@ -15,33 +15,37 @@ import './style.scss'
 import toolplus from 'images/icon/toolplus.png'
 import { useNavigate } from 'react-router-dom';
 import { ICategory } from 'models';
-
+import { getCategoryId } from 'utils/apis/category';
+import classnames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 const drawerWidth = 240;
 
 interface Props {
     data: ICategory[]
-    window?: () => Window;
+    windows?: () => Window;
     disable: boolean
 }
 
 export default function Sidebar(props: Props) {
-    const { window, data, disable } = props;
+    const { windows, data, disable } = props;
     const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [open, setOpen] = React.useState<string>('');
+    const [url, setUrl] = React.useState<string>('');
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
     const handleClick = (id: string, url: string, length: number) => {
-        if (length>0){
+        if (length > 0) {
             if (id === open) {
                 setOpen('');
             } else {
                 setOpen(id);
             }
-        }else{
+        } else {
             navigate(url);
         }
     };
@@ -75,9 +79,19 @@ export default function Sidebar(props: Props) {
                         <Collapse in={open === item._id ? true : false} timeout="auto" unmountOnExit >
                             {item.children.map((child) => (
                                 <List component="div" disablePadding key={child.id}>
-                                    <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickLink(child.url)}>
+                                    <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickLink(child.url)}
+                                        className={classnames({
+                                            "list-item-active": window.location.pathname.replace('/','') === child.url,
+                                        })}
+                                    >
                                         <ListItemIcon>
-                                            <img src={child.image} alt={child.name} style={{ width: '20px', height: '20px' }} />
+                                            {window.location.pathname.replace('/','')  === child.url ? (
+                                                <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#FFC100", }} />
+                                            ) : (
+                                                <img src={child.image} alt={child.name} style={{ width: '20px', height: '20px' }} />
+                                            )}
+
+
                                         </ListItemIcon>
                                         <ListItemText primary={child.name} />
                                     </ListItemButton>
@@ -91,7 +105,18 @@ export default function Sidebar(props: Props) {
         </div>
     );
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+    const container = windows !== undefined ? () => windows().document.body : undefined;
+    const loadCategoryId = async (url: string) => {
+        let data = await getCategoryId(url)
+        if (data.code === 200) {
+            setOpen(data.data.id)
+            setUrl(data.data.url)
+        }
+    }
+    React.useEffect(() => {
+        let url = window.location.pathname
+        loadCategoryId(url)
+    }, [])
     return (
         <Box
             component="nav"

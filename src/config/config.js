@@ -75,6 +75,9 @@ export const api = {
   updateChildrenCategory:{
     url: domainWeb + 'category/children/update',
   },
+  getCategoryId:{
+    url: domainWeb + 'category/getId', 
+  },
   //Setting
   createSetting:{
     url: domainWeb + 'setting/create',

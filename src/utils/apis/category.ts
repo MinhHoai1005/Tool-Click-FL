@@ -1,6 +1,6 @@
 import { api } from "config/config"
 import { Fetch } from "utils/fetch"
-import { Response, ICategory } from "models"
+import { Response, ICategory,ICategoryId } from "models"
 
 export const createCategory = async ( name: string, url_web: string, image: string) => {
     const url = api.createCategory.url
@@ -78,5 +78,13 @@ export const createChildrenCategory = async (id: string|undefined, name: string,
         image: image,
     }
     const response = await Fetch.Post<Response>(url, body)
+    return response
+}
+export const getCategoryId = async ( url_web: string) => {
+    const url = api.getCategoryId.url
+    const body = {
+        url: url_web,
+    }
+    const response = await Fetch.Post<ICategoryId>(url, body)
     return response
 }
