@@ -34,15 +34,15 @@ export default function Sidebar(props: Props) {
         setMobileOpen(!mobileOpen);
     };
 
-    const handleClick = (id: string, url: string ) => {
-        if (url !== '') {
-            navigate(url);
-        } else {
+    const handleClick = (id: string, url: string, length: number) => {
+        if (length>0){
             if (id === open) {
                 setOpen('');
             } else {
                 setOpen(id);
             }
+        }else{
+            navigate(url);
         }
     };
     const handleClickLink = (value: string) => {
@@ -58,26 +58,26 @@ export default function Sidebar(props: Props) {
                 {data.map((item) => (
                     <div key={item._id}>
                         <ListItem disablePadding >
-                            <ListItemButton onClick={() => handleClick(item._id, item.url)}>
+                            <ListItemButton onClick={() => handleClick(item._id, item.url, item.children.length)}>
                                 <ListItemIcon>
-                                    <img src={item.image} alt={item.name} />
+                                    <img src={item.image} alt={item.name} style={{ width: '30px', height: '30px' }} />
                                 </ListItemIcon>
 
                                 <ListItemText primary={item.name} />
-                                {disable && (
+                                {disable && item.children.length > 0 && (
                                     <ListItemIcon>
-                                        {item.url !== '' ? "" : open === item._id ? <ExpandLess /> : <ExpandMore />}
+                                        {open === item._id ? <ExpandLess /> : <ExpandMore />}
                                     </ListItemIcon>
                                 )}
 
                             </ListItemButton>
                         </ListItem>
                         <Collapse in={open === item._id ? true : false} timeout="auto" unmountOnExit >
-                            { item.children.map((child) => (
+                            {item.children.map((child) => (
                                 <List component="div" disablePadding key={child.id}>
                                     <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickLink(child.url)}>
                                         <ListItemIcon>
-                                        <img src={child.image} alt={child.name} />
+                                            <img src={child.image} alt={child.name} style={{ width: '20px', height: '20px' }} />
                                         </ListItemIcon>
                                         <ListItemText primary={child.name} />
                                     </ListItemButton>

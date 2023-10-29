@@ -22,7 +22,7 @@ export function UserLayout(props: UserLayoutProps) {
   const [menus, setMenus] = useState<ICategory[]>()
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [tabView, setTabView] = useState<string>("home")
-  const [sidebar, setSidebar] = useState([{
+  const [sidebars, setSidebars] = useState([{
     _id: "1",
     name: 'Home',
     image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fhome.svg?alt=media&token=8ba4c82c-e3e6-4bdb-9638-1a8cf04a7956&_gl=1*dct06h*_ga*NTg1ODg5MjYyLjE2Njk5ODM1NTg.*_ga_CW55HF8NVT*MTY5ODQ3Njc5Mi4zNS4xLjE2OTg0NzY5MDguMTUuMC4w',
@@ -54,7 +54,11 @@ export function UserLayout(props: UserLayoutProps) {
     if (data.code === 200) {
       setMenus(data.data)
 
-     console.log(data.data)
+      let sidebar = sidebars
+      for (let i = 0; i < data.data.length; i++) {
+        sidebar = sidebar.concat(data.data[i])
+      }
+      setSidebars(sidebar)
     }
   }
 
@@ -70,7 +74,7 @@ export function UserLayout(props: UserLayoutProps) {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Header drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
-      <Sidebar data={sidebar} disable={true} />
+      <Sidebar data={sidebars} disable={true} />
       <Box
         component="main"
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
