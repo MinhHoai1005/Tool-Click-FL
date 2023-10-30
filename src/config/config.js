@@ -72,32 +72,39 @@ export const api = {
   deleteChildrenCategory: {
     url: domainWeb + 'category/children/delete',
   },
-  updateChildrenCategory:{
+  updateChildrenCategory: {
     url: domainWeb + 'category/children/update',
   },
-  getCategoryId:{
-    url: domainWeb + 'category/getId', 
+  getCategoryId: {
+    url: domainWeb + 'category/getId',
   },
   //Setting
-  createSetting:{
+  createSetting: {
     url: domainWeb + 'setting/create',
   },
-  updateSetting:{
+  updateSetting: {
     url: domainWeb + 'setting/update',
   },
-  deleteSetting:{
-    url: domainWeb +'setting/delete',
+  deleteSetting: {
+    url: domainWeb + 'setting/delete',
   },
-  getAllSetting:{
+  getAllSetting: {
     url: domainWeb + 'setting/getall',
   },
-  
+
   //Price
-  createPrice:{
+  createPrice: {
     url: domainWeb + 'price/create',
   },
-  getAllPrice:{
+  getAllPrice: {
     url: domainWeb + 'price/getall',
+  },
+  getPrice: {
+    url: domainWeb + 'price/detail',
+  },
+  //Process
+  createProcess:{
+    url: domainWeb + 'process/create',
   },
   //File
   uploadFile: {

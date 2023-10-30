@@ -1,5 +1,12 @@
-.layout-post{
-    .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+.layout-post {
+    .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
         height: 40px;
     }
+}
+
+.happy-click-img {
+    transform: translateY(-5px);
+    transition: .3s ease-in-out;
+    border: 2px solid blue;
+    border-radius: 100%;
 }

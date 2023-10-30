@@ -30,7 +30,7 @@ function App() {
   }
   useEffect(() => {
     loadMenu();
-  },[])
+  }, [])
   return (
     <Provider store={store}>
       <BrowserRouter history={history}>
@@ -47,12 +47,11 @@ function App() {
                 <React.Fragment key={menu._id}>
                   {menu.children !== null && menu.children !== undefined && menu.children.map((child) => (
                     <React.Fragment key={child.id}>
-                      <Route path={child.url} element={<Post />} />
+                      <Route path={child.url} element={<Post id={child.id} />} />
                     </React.Fragment>
                   ))}
                 </React.Fragment>
               ))}
-              <Route path="layout" element={<Post />} />
             </Route>
             {/* Admin */}
             <Route path='/admin' element={<AdminLayout></AdminLayout>} >

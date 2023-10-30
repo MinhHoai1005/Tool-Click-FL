@@ -1,7 +1,6 @@
 import { api } from "config/config"
 import { Fetch } from "utils/fetch"
-import { ISetting, Response } from "models"
-import { formatIntToString } from "utils"
+import { ISetting, Response,IConfig } from "models"
 
 export const createSetting = async (name: string, image: string) => {
     const url = api.createSetting.url
@@ -47,5 +46,13 @@ export const createPrice = async (inputs:any) => {
 export const getAllPrice = async () => {
     const url = api.getAllPrice.url
     const response = await Fetch.Post<Response>(url)
+    return response
+}
+export const getPrice = async (id: string) => {
+    const url = api.getPrice.url
+    const body = {
+        id: id
+    }
+    const response = await Fetch.Post<IConfig[]>(url,body)
     return response
 }

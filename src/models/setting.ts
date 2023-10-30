@@ -6,6 +6,6 @@ export interface ISetting {
 export interface IConfig {
     _id: string,
     category: string,
-    happy:string
-    price:string,
+    happy: string
+    price: number,
 }

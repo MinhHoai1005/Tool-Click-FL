@@ -11,6 +11,7 @@ import { Toolbar } from '@mui/material';
 import { Post } from 'features/layout';
 import { getAllCategory } from 'utils/apis/category';
 import { ICategory } from 'models';
+import { ToastContainer } from 'react-toastify';
 
 const drawerWidth: number = 240;
 
@@ -72,6 +73,7 @@ export function UserLayout(props: UserLayoutProps) {
   }, [])
   return (
     <Box sx={{ display: 'flex' }}>
+            <ToastContainer />
       <CssBaseline />
       <Header drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
       <Sidebar data={sidebars} disable={true} />
@@ -90,7 +92,7 @@ export function UserLayout(props: UserLayoutProps) {
             <React.Fragment key={menu._id}>
               {menu.children !== null && menu.children !== undefined && menu.children.map((child) => (
                 <React.Fragment key={child.id}>
-                  <Route path={child.url} element={<Post />} />
+                  <Route path={child.url} element={<Post id={child.id}/>} />
                 </React.Fragment>
               ))}
             </React.Fragment>
