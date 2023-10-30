@@ -6,11 +6,11 @@ import React, { useEffect, useState } from 'react'
 import { formatIntToString } from 'utils';
 import './styles.scss'
 import { getAllSetting, getPrice } from 'utils/apis/setting';
-import { ISetting, IConfig } from 'models';
+import { ISetting, IConfig,IHistory } from 'models';
 import classnames from "classnames";
 import { Note } from './data'
 import { History } from './History'
-import { createProcess } from 'utils/apis/process';
+import { createProcess, loadProcessId } from 'utils/apis/process';
 import { toast } from 'react-toastify';
 
 interface PostProps {
@@ -20,14 +20,24 @@ export const Post: React.FC<PostProps> = (props) => {
   const { id } = props;
   //Tab
   const [value, setValue] = React.useState('1');
-
+  const [history,setHistory]=useState<IHistory[]>([]);
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
+    if(newValue ==="2"){
+      loadHistory();
+    }
   };
+  const loadHistory =async()=>{
+    let data = await loadProcessId(id)
+    if(data.code ===200){
+      setHistory(data.data)
+    }
+  }
   //Input
   const [url, setUrl] = useState<string>('');
   const [total, setTotal] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
+  const [note, setNote] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(0);
   const [happys, setHappys] = useState<ISetting[]>([])
   const [idHappy, setIdHappy] = useState<ISetting>();
@@ -59,7 +69,7 @@ export const Post: React.FC<PostProps> = (props) => {
   }
   useEffect(() => {
     loadHappy();
-  }, [happys])
+  }, [idHappy?._id])
   useEffect(() => {
     loadPrice(id);
   }, [id])
@@ -72,7 +82,7 @@ export const Post: React.FC<PostProps> = (props) => {
       toast.error("Giá tiền mỗi tương tác không được thấp hơn " + price)
       return
     }
-    let data = await createProcess(id, total, quantity)
+    let data = await createProcess(id, total, quantity, url, note)
     if (data.code === 200) {
       toast.success('Tạo mới danh mục con thành công')
       setTotal(0)
@@ -80,9 +90,6 @@ export const Post: React.FC<PostProps> = (props) => {
     } else {
       toast.error(data.message)
     }
-  }
-  const onChangeTotal = ()=>{
-
   }
   return (
     <Box sx={{ m: 2, borderRadius: '1px' }} className='layout-post'>
@@ -103,7 +110,7 @@ export const Post: React.FC<PostProps> = (props) => {
               <Box >
                 <Box sx={{ display: 'flex' }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Link hoặc ID bài viết:</Typography>
-                  <TextField variant="outlined" fullWidth value={url} onChange={(e) => setUrl(e.target.value)} />
+                  <TextField variant="outlined" fullWidth multiline value={url} onChange={(e) => setUrl(e.target.value)} />
                 </Box>
                 <Box sx={{ display: 'flex', mt: 2 }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Chọn cảm xúc:</Typography>
@@ -141,10 +148,9 @@ export const Post: React.FC<PostProps> = (props) => {
                 </Box>
                 <Box sx={{ display: 'flex', mt: 2 }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Ghi chú:</Typography>
-                  <TextField variant="outlined" label="Nhập nội dung ghi chú về tiến trình của bạn" fullWidth multiline onChange={(e) => e.target.value} />
+                  <TextField variant="outlined" label="Nhập nội dung ghi chú về tiến trình của bạn" fullWidth multiline value={note} onChange={(e) => setNote(e.target.value)} />
                 </Box>
                 <Box sx={{ textAlign: 'center', background: '#FFAA47', p: 2, mt: 2, borderRadius: '5px' }}>
-                  {/* <React.Fragment>Tổng <Typography variant="h3">0 xu </Typography></React.Fragment> */}
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: '5px', color: 'white !important' }}>
                     <Typography >Tổng </Typography>
                     <Typography sx={{ fontWeight: 'bold !important' }}>{quantity * total} xu </Typography>
@@ -172,7 +178,7 @@ export const Post: React.FC<PostProps> = (props) => {
 
           </TabPanel>
           <TabPanel value="2">
-            <History />
+            <History rows ={history}/>
           </TabPanel>
         </TabContext>
       </Box>

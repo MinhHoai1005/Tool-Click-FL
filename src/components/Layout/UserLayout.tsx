@@ -73,7 +73,7 @@ export function UserLayout(props: UserLayoutProps) {
   }, [])
   return (
     <Box sx={{ display: 'flex' }}>
-            <ToastContainer />
+      <ToastContainer />
       <CssBaseline />
       <Header drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
       <Sidebar data={sidebars} disable={true} />
@@ -92,7 +92,7 @@ export function UserLayout(props: UserLayoutProps) {
             <React.Fragment key={menu._id}>
               {menu.children !== null && menu.children !== undefined && menu.children.map((child) => (
                 <React.Fragment key={child.id}>
-                  <Route path={child.url} element={<Post id={child.id}/>} />
+                  <Route path={child.url} element={<Post id={child.id} />} />
                 </React.Fragment>
               ))}
             </React.Fragment>
