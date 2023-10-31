@@ -1,8 +1,9 @@
-import { Box, Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination, Autocomplete, TextField } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { IHistory } from 'models';
-
+import { loadProcessByLink, loadProcessId } from 'utils/apis/process';
+import { groupBy } from 'utils';
 interface Column {
   id: string;
   label: string;
@@ -22,14 +23,19 @@ const columns: Column[] = [
 ];
 
 interface HistoryProps {
-  rows: IHistory[]
+  id: string
+}
+interface Autocomplete {
+  name: string;
 }
 export const History: React.FC<HistoryProps> = (props) => {
 
-  const { rows } = props;
+  const { id } = props;
+
   const [page, setPage] = useState<number>(0)
   const [rowsPerPage, setRowsPerPage] = useState<number>(10)
-
+  const [rows, setRows] = useState<IHistory[]>([]);
+  const [options, setOptions] = useState<Autocomplete[]>([])
   const handleChangeRowsPerPage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -38,12 +44,52 @@ export const History: React.FC<HistoryProps> = (props) => {
     setPage(newPage);
   };
 
-
+  const handleChange = (event, newValue) => {
+    if (newValue === null) {
+      loadHistory(id)
+    } else {
+      setRowsPerPage(10);
+      setPage(0);
+      loadHistoryByLink(newValue.name)
+    }
+  };
+  const loadHistoryByLink = async (link: string) => {
+    let data = await loadProcessByLink(link)
+    if (data.code === 200 ) {
+      setRows(data.data)
+    }
+  }
+  const loadHistory = async (id: string) => {
+    let data = await loadProcessId(id)
+    if (data.code === 200) {
+      setRows(data.data)
+      let array: Autocomplete[] = []
+      let groupData = groupBy(data.data, i => i.link)
+      for (let group in groupData) {
+        let input = {
+          name: group,
+        }
+        array.push(input)
+      }
+      setOptions(array)
+    }
+  }
+  useEffect(() => {
+    console.log(id)
+    loadHistory(id)
+  }, [id])
   return (
     <Box>
 
       <Box>
-
+        <Autocomplete
+          onChange={handleChange}
+          id="searchable-select"
+          options={options === undefined ? [] : options}
+          getOptionLabel={(option) => `${option.name}`}
+          renderInput={(params) => <TextField {...params} label="Link hoặc ID user" />}
+          sx={{ width: '50%' }}
+        />
       </Box>
       <Box>
         <Paper sx={{ width: '100%' }}>
@@ -72,7 +118,7 @@ export const History: React.FC<HistoryProps> = (props) => {
                       {row.link}
                     </TableCell>
                     <TableCell align="right">{row.quantity.toLocaleString('en-US')}</TableCell>
-                    <TableCell align="right">{row.total.toLocaleString('en-US')}</TableCell>
+                    <TableCell align="right">{row.total> 0 ?row.total.toLocaleString('en-US'):0}</TableCell>
                     <TableCell align="right">{(row.quantity * row.total).toLocaleString('en-US')}</TableCell>
                     <TableCell align="left">{row.note}</TableCell>
                     <TableCell sx={{ color: row.status === 5 ? "green" : row.status === 3 ? "blue" : "red" }}>

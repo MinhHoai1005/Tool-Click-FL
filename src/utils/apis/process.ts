@@ -38,3 +38,19 @@ export const loadProcessId = async (id: string) => {
     const response = await Fetch.Post<IHistory[]>(url, body)
     return response
 }
+export const loadProcessByLink = async (link: string) => {
+    const url = api.loadProcessByLink.url
+    const user = localStorage.getItem('user')
+    let client_id = 0
+    if (user) {
+        const jsonObject = JSON.parse(user);
+        client_id = jsonObject.client_id
+    }
+
+    const body = {
+        client_id: client_id,
+        link: link,
+    }
+    const response = await Fetch.Post<IHistory[]>(url, body)
+    return response
+}

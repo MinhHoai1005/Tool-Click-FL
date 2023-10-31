@@ -109,6 +109,9 @@ export const api = {
   loadProcessId:{
     url: domainWeb + 'process/detailId',
   },
+  loadProcessByLink:{
+    url: domainWeb + 'process/detailLink',
+  },
   //File
   uploadFile: {
     url: domainWeb + 'middlewares/uploadfile',

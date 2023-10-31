@@ -6,11 +6,11 @@ import React, { useEffect, useState } from 'react'
 import { formatIntToString } from 'utils';
 import './styles.scss'
 import { getAllSetting, getPrice } from 'utils/apis/setting';
-import { ISetting, IConfig,IHistory } from 'models';
+import { ISetting, IConfig } from 'models';
 import classnames from "classnames";
 import { Note } from './data'
 import { History } from './History'
-import { createProcess, loadProcessId } from 'utils/apis/process';
+import { createProcess } from 'utils/apis/process';
 import { toast } from 'react-toastify';
 
 interface PostProps {
@@ -20,19 +20,9 @@ export const Post: React.FC<PostProps> = (props) => {
   const { id } = props;
   //Tab
   const [value, setValue] = React.useState('1');
-  const [history,setHistory]=useState<IHistory[]>([]);
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
-    if(newValue ==="2"){
-      loadHistory();
-    }
   };
-  const loadHistory =async()=>{
-    let data = await loadProcessId(id)
-    if(data.code ===200){
-      setHistory(data.data)
-    }
-  }
   //Input
   const [url, setUrl] = useState<string>('');
   const [total, setTotal] = useState<number>(0);
@@ -48,7 +38,9 @@ export const Post: React.FC<PostProps> = (props) => {
     if (data.code === 200) {
       setHappys(data.data)
       if (data.data.length > 0) {
-        setIdHappy(data.data[0])
+        if (idHappy === undefined) {
+          setIdHappy(data.data[0])
+        }
         loadTotal(data.data[0]._id)
       }
     }
@@ -87,6 +79,8 @@ export const Post: React.FC<PostProps> = (props) => {
       toast.success('Tạo mới danh mục con thành công')
       setTotal(0)
       setQuantity(0)
+      setUrl('')
+      setNote('')
     } else {
       toast.error(data.message)
     }
@@ -115,7 +109,7 @@ export const Post: React.FC<PostProps> = (props) => {
                 <Box sx={{ display: 'flex', mt: 2 }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Chọn cảm xúc:</Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                    {happys.map((happy, index) => (
+                    {happys.map((happy) => (
                       <img
                         style={{ width: '40px', height: '40px' }}
                         className={classnames({
@@ -178,7 +172,7 @@ export const Post: React.FC<PostProps> = (props) => {
 
           </TabPanel>
           <TabPanel value="2">
-            <History rows ={history}/>
+            <History id ={id}/>
           </TabPanel>
         </TabContext>
       </Box>
