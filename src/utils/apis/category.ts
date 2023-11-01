@@ -1,13 +1,14 @@
 import { api } from "config/config"
 import { Fetch } from "utils/fetch"
-import { Response, ICategory,ICategoryId } from "models"
+import { Response, ICategory, ICategoryId } from "models"
 
-export const createCategory = async ( name: string, url_web: string, image: string) => {
+export const createCategory = async (name: string, url_web: string, image: string,menu:string) => {
     const url = api.createCategory.url
     const body = {
         name: name,
         url: url_web,
         image: image,
+        menu:menu,
     }
     const response = await Fetch.Post<Response>(url, body)
     return response
@@ -28,18 +29,19 @@ export const deleteCategory = async (id: string) => {
     const response = await Fetch.Post<Response>(url, body)
     return response
 }
-export const updateCategory = async (id: string | undefined, name: string, url_web: string, image: string) => {
+export const updateCategory = async (id: string | undefined, name: string, url_web: string, image: string, menu: string) => {
     const url = api.updateCategory.url
     const body = {
         id: id,
         name: name,
         url: url_web,
         image: image,
+        menu: '',
     }
     const response = await Fetch.Post<Response>(url, body)
     return response
 }
-export const getDetailCategory = async (id: string|undefined) => {
+export const getDetailCategory = async (id: string | undefined) => {
     const url = api.getDetailCategory.url
     const body = {
         id: id
@@ -48,7 +50,7 @@ export const getDetailCategory = async (id: string|undefined) => {
     return response
 }
 
-export const deleteChildrenCategory = async (id: string|undefined,id_children: string|undefined) => {
+export const deleteChildrenCategory = async (id: string | undefined, id_children: string | undefined) => {
     const url = api.deleteChildrenCategory.url
     const body = {
         id: id,
@@ -57,7 +59,7 @@ export const deleteChildrenCategory = async (id: string|undefined,id_children: s
     const response = await Fetch.Post<Response>(url, body)
     return response
 }
-export const updateChildrenCategory = async (id: string|undefined,id_children: string|undefined, name: string, url_web: string, image: string) => {
+export const updateChildrenCategory = async (id: string | undefined, id_children: string | undefined, name: string, url_web: string, image: string, menu: string) => {
     const url = api.updateChildrenCategory.url
     const body = {
         id: id,
@@ -65,22 +67,24 @@ export const updateChildrenCategory = async (id: string|undefined,id_children: s
         name: name,
         url: url_web,
         image: image,
+        menu: menu,
     }
     const response = await Fetch.Post<Response>(url, body)
     return response
 }
-export const createChildrenCategory = async (id: string|undefined, name: string, url_web: string, image: string) => {
+export const createChildrenCategory = async (id: string | undefined, name: string, url_web: string, image: string, menu: string) => {
     const url = api.createCategory.url
     const body = {
         id: id,
         name: name,
         url: url_web,
         image: image,
+        menu: menu,
     }
     const response = await Fetch.Post<Response>(url, body)
     return response
 }
-export const getCategoryId = async ( url_web: string) => {
+export const getCategoryId = async (url_web: string) => {
     const url = api.getCategoryId.url
     const body = {
         url: url_web,

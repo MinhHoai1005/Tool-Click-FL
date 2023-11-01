@@ -76,7 +76,7 @@ export const Post: React.FC<PostProps> = (props) => {
     }
     let data = await createProcess(id, total, quantity, url, note)
     if (data.code === 200) {
-      toast.success('Tạo mới danh mục con thành công')
+      toast.success('Tạo mới tiến trình thành công')
       setTotal(0)
       setQuantity(0)
       setUrl('')

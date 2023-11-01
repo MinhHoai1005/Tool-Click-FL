@@ -3,15 +3,17 @@ export interface ICategory {
     name: string,
     url: string,
     image: string,
-    children: IChildren[]
+    children: IChildren[],
+    menu: string ,
 }
 export interface IChildren {
     id: string,
     name: string,
     url: string,
     image: string,
+    menu: string ,
 }
-export interface ICategoryId{
+export interface ICategoryId {
     id: string,
     url: string,
 }
