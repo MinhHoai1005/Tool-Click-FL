@@ -1,4 +1,4 @@
-export const domainWeb = 'http://localhost:8085/public-api/';
+export const domainWeb = 'https://toolclick-be-rjijz.ondigitalocean.app/public-api/';
 
 export const Firebase = {
   apiKey: 'AIzaSyC2LmCe5Tv9yFnSDN1730FCCb12mHEGZcw',

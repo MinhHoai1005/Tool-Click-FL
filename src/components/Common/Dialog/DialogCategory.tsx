@@ -130,11 +130,11 @@ export const DialogCategory: React.FC<DialogCategoryProps> = (props) => {
                     onChange={handleChangeSelect}
                     fullWidth
                 >
-                    <MenuItem value={'1'}>Giao diện buff like bài viết</MenuItem>
-                    <MenuItem value={'2'}>Giao diện buff like comment</MenuItem>
-                    <MenuItem value={'3'}>Giao diện buff comment bài viết</MenuItem>
-                    <MenuItem value={'4'}>Giao diện buff view video</MenuItem>
-                    <MenuItem value={'5'}>Giao diện buff view videoGiao diện buff view video</MenuItem>
+                    <MenuItem value={'1'}>Buff like bài viết</MenuItem>
+                    <MenuItem value={'2'}>Buff like comment</MenuItem>
+                    <MenuItem value={'3'}>Buff comment bài viết</MenuItem>
+                    <MenuItem value={'4'}>Buff mắt livestream</MenuItem>
+                    <MenuItem value={'5'}>Buff view video</MenuItem>
                 </Select>
             </DialogContent>
             <DialogActions>

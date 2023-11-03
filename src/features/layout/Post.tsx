@@ -15,9 +15,10 @@ import { toast } from 'react-toastify';
 
 interface PostProps {
   id: string,
+  name:string,
 }
 export const Post: React.FC<PostProps> = (props) => {
-  const { id } = props;
+  const { id,name } = props;
   //Tab
   const [value, setValue] = React.useState('1');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -77,7 +78,7 @@ export const Post: React.FC<PostProps> = (props) => {
     let data = await createProcess(id, total, quantity, url, note)
     if (data.code === 200) {
       toast.success('Tạo mới tiến trình thành công')
-      setTotal(0)
+      setTotal(price)
       setQuantity(0)
       setUrl('')
       setNote('')
@@ -89,7 +90,7 @@ export const Post: React.FC<PostProps> = (props) => {
     <Box sx={{ m: 2, borderRadius: '1px' }} className='layout-post'>
       <CssBaseline />
       <Typography variant="h5" component="h5" sx={{ textTransform: 'uppercase' }}>
-        BUFF LIKE BÀI Viết
+      {name}
       </Typography>
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
@@ -100,7 +101,7 @@ export const Post: React.FC<PostProps> = (props) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <Box sx={{ display: 'grid', gridTemplateColumns: 'auto auto', gap: '10px' }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: '65% 35%', gap: '10px' }}>
               <Box >
                 <Box sx={{ display: 'flex' }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Link hoặc ID bài viết:</Typography>
@@ -153,7 +154,7 @@ export const Post: React.FC<PostProps> = (props) => {
                     <Typography >Bạn sẽ buff </Typography>
                     <Typography sx={{ fontWeight: 'bold !important' }}> {quantity.toLocaleString('en-US')}  {idHappy?.name} </Typography>
                     <Typography >với giá</Typography>
-                    <Typography sx={{ fontWeight: 'bold !important' }}>{total.toLocaleString('en-US')} / love </Typography>
+                    <Typography sx={{ fontWeight: 'bold !important' }}>{total.toLocaleString('en-US')} / {idHappy?.name} </Typography>
                   </Box>
                 </Box>
                 <Button sx={{ mt: 1, width: '100%', padding: '0.75rem 1.5rem', background: '#007DC4', color: 'white' }} onClick={onSubmit}>

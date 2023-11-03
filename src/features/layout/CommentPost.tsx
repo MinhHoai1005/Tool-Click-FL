@@ -7,8 +7,6 @@ import React, { useEffect, useState } from 'react'
 import { formatIntToString } from 'utils';
 import './styles.scss'
 import { getPrice } from 'utils/apis/setting';
-import { ISetting, IConfig } from 'models';
-import classnames from "classnames";
 import { Note } from './data'
 import { History } from './History'
 import { createProcess } from 'utils/apis/process';
@@ -16,9 +14,10 @@ import { toast } from 'react-toastify';
 
 interface CommentPostProps {
   id: string,
+  name: string,
 }
 export const CommentPost: React.FC<CommentPostProps> = (props) => {
-  const { id } = props;
+  const { id, name } = props;
   //Tab
   const [value, setValue] = React.useState('1');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -30,52 +29,50 @@ export const CommentPost: React.FC<CommentPostProps> = (props) => {
   const [price, setPrice] = useState<number>(0);
   const [note, setNote] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(0);
-  const [happys, setHappys] = useState<ISetting[]>([])
-  const [idHappy, setIdHappy] = useState<ISetting>();
-  const [prices, setPrices] = useState<IConfig[]>([])
+  const [comment, setComment] = useState<string>('');
 
-  const loadTotal = async (value: string) => {
-    let num = prices.find((id) => id.happy === value)?.price
-    if (num === undefined) {
-      num = 0
-    }
-    setTotal(num)
-    setPrice(num)
-  }
   const loadPrice = async (id: string) => {
     let data = await getPrice(id)
     if (data.code === 200) {
-      setPrices(data.data)
+      if(data.data.length>0){
+        setPrice(data.data[0].price)
+        setTotal(data.data[0].price)
+      }
     }
   }
   useEffect(() => {
     loadPrice(id);
   }, [id])
-  const onHappyClick = async (happy: ISetting) => {
-    setIdHappy(happy)
-    loadTotal(happy._id)
-  }
   const onSubmit = async () => {
     if (total < price) {
       toast.error("Giá tiền mỗi tương tác không được thấp hơn " + price)
       return
     }
-    let data = await createProcess(id, total, quantity, url, note)
+    if (quantity === 0) {
+      toast.error("Chưa nhập số lượng tăng ")
+      return
+    }
+    let data = await createProcess(id, total, quantity, url, note, comment)
     if (data.code === 200) {
       toast.success('Tạo mới tiến trình thành công')
-      setTotal(0)
+      setTotal(price)
       setQuantity(0)
       setUrl('')
       setNote('')
+      setComment('')
     } else {
       toast.error(data.message)
     }
+  }
+  const handleChangeComment = (value: string) => {
+    setComment(value)
+    setQuantity(value.split('\n').length)
   }
   return (
     <Box sx={{ m: 2, borderRadius: '1px' }} className='layout-post'>
       <CssBaseline />
       <Typography variant="h5" component="h5" sx={{ textTransform: 'uppercase' }}>
-        BUFF LIKE BÀI Viết
+        {name}
       </Typography>
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
@@ -86,38 +83,11 @@ export const CommentPost: React.FC<CommentPostProps> = (props) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <Box sx={{ display: 'grid', gridTemplateColumns: 'auto auto', gap: '10px' }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '65% 35%', gap: '10px' }}>
               <Box >
                 <Box sx={{ display: 'flex' }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Link hoặc ID bài viết:</Typography>
                   <TextField variant="outlined" fullWidth multiline value={url} onChange={(e) => setUrl(e.target.value)} />
-                </Box>
-                <Box sx={{ display: 'flex', mt: 2 }}>
-                  <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Chọn cảm xúc:</Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                    {happys.map((happy) => (
-                      <img
-                        style={{ width: '40px', height: '40px' }}
-                        className={classnames({
-                          "happy-click-img": idHappy?._id === happy._id ? true : false,
-                        })}
-                        onClick={() => onHappyClick(happy)}
-                        key={happy._id} src={happy.image} alt={happy.name} />
-                    ))}
-                  </Box>
-                </Box>
-                <Box sx={{ display: 'flex', mt: 2 }}>
-                  <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Số lượng cần tăng:</Typography>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: Note.note,
-                    }}
-                    style={{ border: '1px solid', borderRadius: '5px', padding: '16.5px 14px', borderColor: 'rgba(0, 0, 0, 0.23)', color: '#e46a76' }}
-                  ></div>
-                </Box>
-                <Box sx={{ display: 'flex', mt: 2 }}>
-                  <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Số lượng cần tăng:</Typography>
-                  <TextField variant="outlined" fullWidth value={quantity.toLocaleString('en-US')} onChange={(e) => setQuantity(formatIntToString(e.target.value))} />
                 </Box>
                 <Box sx={{ display: 'flex', mt: 2 }}>
                   <Box>
@@ -125,6 +95,23 @@ export const CommentPost: React.FC<CommentPostProps> = (props) => {
                     <Typography sx={{ minWidth: '200px', alignSelf: 'center', color: '#e46a76' }}>Giá thấp nhất: {price.toLocaleString('en-US')} xu</Typography>
                   </Box>
                   <TextField variant="outlined" fullWidth value={total.toLocaleString('en-US')} onChange={(e) => setTotal(formatIntToString(e.target.value))} />
+                </Box>
+                <Box sx={{ display: 'flex', mt: 2 }}>
+                  <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Giá tiền mỗi tương tác:</Typography>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: Note.comment_post,
+                    }}
+                    style={{ border: '1px solid', borderRadius: '5px', padding: '16.5px 14px', borderColor: 'rgba(0, 0, 0, 0.23)', color: '#e46a76' }}
+                  ></div>
+                </Box>
+                <Box sx={{ display: 'flex', mt: 2 }}>
+                  <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}></Typography>
+                  <TextField variant="outlined" label="Nhập nội dung bình luận (Mỗi dòng tương đương với 1 bình luận):" fullWidth multiline value={comment} onChange={(e) => handleChangeComment(e.target.value)} />
+                </Box>
+                <Box sx={{ display: 'flex', mt: 2 }}>
+                  <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Số lượng cần tăng:</Typography>
+                  <TextField variant="outlined" fullWidth disabled value={quantity.toLocaleString('en-US')} onChange={(e) => setQuantity(formatIntToString(e.target.value))} />
                 </Box>
                 <Box sx={{ display: 'flex', mt: 2 }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Ghi chú:</Typography>
@@ -137,9 +124,9 @@ export const CommentPost: React.FC<CommentPostProps> = (props) => {
                   </Box>
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: '5px', color: 'white !important' }}>
                     <Typography >Bạn sẽ buff </Typography>
-                    <Typography sx={{ fontWeight: 'bold !important' }}> {quantity.toLocaleString('en-US')}  {idHappy?.name} </Typography>
+                    <Typography sx={{ fontWeight: 'bold !important' }}> {quantity.toLocaleString('en-US')} comment </Typography>
                     <Typography >với giá</Typography>
-                    <Typography sx={{ fontWeight: 'bold !important' }}>{total.toLocaleString('en-US')} / love </Typography>
+                    <Typography sx={{ fontWeight: 'bold !important' }}>{total.toLocaleString('en-US')} / comment </Typography>
                   </Box>
                 </Box>
                 <Button sx={{ mt: 1, width: '100%', padding: '0.75rem 1.5rem', background: '#007DC4', color: 'white' }} onClick={onSubmit}>

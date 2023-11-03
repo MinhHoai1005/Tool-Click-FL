@@ -1,5 +1,5 @@
 export * from './Comment'
 export * from './CommentPost'
-export * from './Livestream'
+export * from './LiveStream'
 export * from './Post'
 export * from './Video'

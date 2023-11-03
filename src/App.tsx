@@ -14,7 +14,7 @@ import Login from "features/auth/Login"
 import { Register } from "features/auth/Register"
 import { Route, Routes } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css';
-import { Post } from 'features/layout';
+import { Post, Comment, CommentPost, LiveStream, Video } from 'features/layout';
 import { Recharge, History, HomeUser } from 'features/home';
 import { getAllCategory } from 'utils/apis/category';
 import { ICategory } from 'models';
@@ -43,17 +43,19 @@ function App() {
               <Route path="recharge" element={<Recharge />} />
               <Route path="history" element={<History />} />
               {menus?.map((menu) => (
-
                 <React.Fragment key={menu._id}>
                   {menu.children !== null && menu.children !== undefined && menu.children.map((child) => (
                     <React.Fragment key={child.id}>
-                      <Route path={child.url} element={<Post id={child.id} />} />
+                      <Route path={child.url} element={child.menu === '1' ? <Post id={child.id}name={'Buff like bài viết'} /> 
+                      : child.menu === '2' ? <Comment id={child.id} name={'Buff like comment'}/> 
+                      : child.menu === '3' ? <CommentPost id={child.id} name={'Buff comment bài viết'}/> 
+                      : child.menu === '4' ? <LiveStream id={child.id}name={'Buff mắt livestream'} /> 
+                      : <Video id={child.id} name='Buff view video'/>} />
                     </React.Fragment>
                   ))}
                 </React.Fragment>
               ))}
             </Route>
-            {/* Admin */}
             <Route path='/admin' element={<AdminLayout></AdminLayout>} >
               <Route path="account" element={<Account />} />
               <Route path="category" element={<Category />} />

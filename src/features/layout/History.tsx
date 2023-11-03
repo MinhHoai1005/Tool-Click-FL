@@ -75,12 +75,10 @@ export const History: React.FC<HistoryProps> = (props) => {
     }
   }
   useEffect(() => {
-    console.log(id)
     loadHistory(id)
   }, [id])
   return (
     <Box>
-
       <Box>
         <Autocomplete
           onChange={handleChange}

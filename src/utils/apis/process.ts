@@ -2,7 +2,7 @@ import { api } from "config/config"
 import { Fetch } from "utils/fetch"
 import { Response,IHistory } from "models"
 
-export const createProcess = async (id: string, total: number, quantity: number,link:string,note:string) => {
+export const createProcess = async (id: string, total: number, quantity: number,link:string,note:string,comment?:string,time?:number) => {
     const url = api.createProcess.url
     const user = localStorage.getItem('user')
     let client_id = 0
@@ -10,7 +10,6 @@ export const createProcess = async (id: string, total: number, quantity: number,
         const jsonObject = JSON.parse(user);
         client_id = jsonObject.client_id
     }
-
     const body = {
         client_id: client_id,
         category_id: id,
@@ -18,6 +17,8 @@ export const createProcess = async (id: string, total: number, quantity: number,
         quantity: quantity,
         link:link,
         note:note,
+        comment:comment,
+        time:time,
     }
     const response = await Fetch.Post<Response>(url, body)
     return response
