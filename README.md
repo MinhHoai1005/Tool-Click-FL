@@ -86,3 +86,4 @@ features: auth / authentication
 - sing up / register
 - forget password
 
+v0.0.1 build config BE
