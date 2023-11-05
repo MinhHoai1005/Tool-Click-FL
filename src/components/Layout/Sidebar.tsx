@@ -50,6 +50,8 @@ export default function Sidebar(props: Props) {
         }
     };
     const handleClickLink = (value: string) => {
+
+
         navigate(value);
     };
     const drawer = (
@@ -81,7 +83,7 @@ export default function Sidebar(props: Props) {
                                 <List component="div" disablePadding key={child.id}>
                                     <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickLink(child.url)}
                                         className={classnames({
-                                            "list-item-active": window.location.pathname.replace('/','') === child.url,
+                                            "list-item-active": window.location.pathname.replace('/','') === child.url|| window.location.pathname === child.url,
                                         })}
                                     >
                                         <ListItemIcon>
