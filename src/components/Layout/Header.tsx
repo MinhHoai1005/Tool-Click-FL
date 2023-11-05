@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import { Button, Menu, MenuItem, Avatar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
     drawerWidth: number,
@@ -13,6 +14,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = (props) => {
     const { drawerWidth, handleDrawerToggle } = props
+    const navigate = useNavigate();
 
     const onClickDrawerToggle = () => {
         handleDrawerToggle()
@@ -25,6 +27,10 @@ export const Header: React.FC<HeaderProps> = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const handleLogout =()=>{
+        localStorage.clear();
+        navigate('login')
+    }
     return (
         <AppBar
             position="fixed"
@@ -69,7 +75,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
                     >
                         <MenuItem onClick={handleClose}>Profile</MenuItem>
                         <MenuItem onClick={handleClose}>My account</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
                     </Menu>
                 </Typography>
             </Toolbar>
