@@ -29,3 +29,11 @@ export interface IHistory {
     note:string,
     created_date: Date,
 }
+export interface IHistoryUser {
+    category: string,
+    link:string,
+    note:string,
+    total: number,
+    status: number,
+    created_date: Date,
+}

@@ -6,7 +6,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import React, { useEffect, useState } from 'react'
 import { formatIntToString } from 'utils';
 import './styles.scss'
-import { getPrice } from 'utils/apis/setting';
+import { getPriceLike } from 'utils/apis/setting';
 import { Note } from './data'
 import { History } from './History'
 import { createProcess } from 'utils/apis/process';
@@ -32,11 +32,11 @@ export const CommentPost: React.FC<CommentPostProps> = (props) => {
   const [comment, setComment] = useState<string>('');
 
   const loadPrice = async (id: string) => {
-    let data = await getPrice(id)
+    let data = await getPriceLike(id)
     if (data.code === 200) {
-      if(data.data.length>0){
-        setPrice(data.data[0].price)
-        setTotal(data.data[0].price)
+      if (data.data.price !== undefined) {
+        setPrice(data.data.price)
+        setTotal(data.data.price)
       }
     }
   }

@@ -15,10 +15,10 @@ import { toast } from 'react-toastify';
 
 interface PostProps {
   id: string,
-  name:string,
+  name: string,
 }
 export const Post: React.FC<PostProps> = (props) => {
-  const { id,name } = props;
+  const { id, name } = props;
   //Tab
   const [value, setValue] = React.useState('1');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -75,7 +75,7 @@ export const Post: React.FC<PostProps> = (props) => {
       toast.error("Giá tiền mỗi tương tác không được thấp hơn " + price)
       return
     }
-    let data = await createProcess(id, total, quantity, url, note)
+    let data = await createProcess(id,  total, quantity, url, note)
     if (data.code === 200) {
       toast.success('Tạo mới tiến trình thành công')
       setTotal(price)
@@ -90,7 +90,7 @@ export const Post: React.FC<PostProps> = (props) => {
     <Box sx={{ m: 2, borderRadius: '1px' }} className='layout-post'>
       <CssBaseline />
       <Typography variant="h5" component="h5" sx={{ textTransform: 'uppercase' }}>
-      {name}
+        {name}
       </Typography>
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
@@ -101,7 +101,7 @@ export const Post: React.FC<PostProps> = (props) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-          <Box sx={{ display: 'grid', gridTemplateColumns: '65% 35%', gap: '10px' }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '65% 35%', gap: '10px' }}>
               <Box >
                 <Box sx={{ display: 'flex' }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Link hoặc ID bài viết:</Typography>
@@ -173,7 +173,7 @@ export const Post: React.FC<PostProps> = (props) => {
 
           </TabPanel>
           <TabPanel value="2">
-            <History id ={id}/>
+            <History id={id} />
           </TabPanel>
         </TabContext>
       </Box>

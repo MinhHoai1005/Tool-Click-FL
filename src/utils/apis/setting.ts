@@ -56,3 +56,20 @@ export const getPrice = async (id: string) => {
     const response = await Fetch.Post<IConfig[]>(url,body)
     return response
 }
+export const getPriceByHappy = async (id: string,happy:string) => {
+    const url = api.getPriceByHappy.url
+    const body = {
+        id: id,
+        happy:happy,
+    }
+    const response = await Fetch.Post<IConfig[]>(url,body)
+    return response
+}
+export const getPriceLike = async (id: string) => {
+    const url = api.getPriceLike.url
+    const body = {
+        id: id
+    }
+    const response = await Fetch.Post<IConfig>(url,body)
+    return response
+}

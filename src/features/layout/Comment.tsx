@@ -6,9 +6,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import React, { useEffect, useState } from 'react'
 import { formatIntToString } from 'utils';
 import './styles.scss'
-import { getPrice } from 'utils/apis/setting';
-import { ISetting, IConfig } from 'models';
-import classnames from "classnames";
+import { getPriceLike } from 'utils/apis/setting';
 import { Note } from './data'
 import { History } from './History'
 import { createProcess } from 'utils/apis/process';
@@ -16,10 +14,10 @@ import { toast } from 'react-toastify';
 
 interface CommentProps {
   id: string,
-  name:string,
+  name: string,
 }
 export const Comment: React.FC<CommentProps> = (props) => {
-  const { id,name } = props;
+  const { id, name } = props;
   //Tab
   const [value, setValue] = React.useState('1');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -31,16 +29,13 @@ export const Comment: React.FC<CommentProps> = (props) => {
   const [price, setPrice] = useState<number>(0);
   const [note, setNote] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(0);
-  
+
   const loadPrice = async (id: string) => {
-    let data = await getPrice(id)
+    let data = await getPriceLike(id)
     if (data.code === 200) {
-      if (data.data.length>0){
-        setPrice(data.data[0].price)
-        setTotal(data.data[0].price)
-      }else{
-        setPrice(0)
-        setTotal(0)
+      if (data.data.price !== undefined) {
+        setPrice(data.data.price)
+        setTotal(data.data.price)
       }
     }
   }
@@ -78,7 +73,7 @@ export const Comment: React.FC<CommentProps> = (props) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-          <Box sx={{ display: 'grid', gridTemplateColumns: '65% 35%', gap: '10px' }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '65% 35%', gap: '10px' }}>
               <Box >
                 <Box sx={{ display: 'flex' }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Link hoặc ID bài viết:</Typography>
