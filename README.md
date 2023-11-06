@@ -91,3 +91,4 @@ v0.0.2 list-item-active
 v0.0.3 History User
 v0.0.4 Logout
 v0.0.5 Config
+v0.0.6 ConfigBE
