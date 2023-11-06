@@ -1,4 +1,5 @@
-export const domainWeb = 'http://localhost:8085/public-api/';
+// export const domainWeb = 'http://localhost:8085/public-api/';
+export const domainWeb = 'https://api.toolplus.click';
 
 export const Firebase = {
   apiKey: 'AIzaSyC2LmCe5Tv9yFnSDN1730FCCb12mHEGZcw',
@@ -109,16 +110,16 @@ export const api = {
     url: domainWeb + 'price/detail-happy',
   },
   //Process
-  createProcess:{
+  createProcess: {
     url: domainWeb + 'process/create',
   },
-  loadProcessId:{
+  loadProcessId: {
     url: domainWeb + 'process/detailId',
   },
-  loadProcessByLink:{
+  loadProcessByLink: {
     url: domainWeb + 'process/detailLink',
   },
-  processClientID:{
+  processClientID: {
     url: domainWeb + 'process/client_id',
   },
   //File
