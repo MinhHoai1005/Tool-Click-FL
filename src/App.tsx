@@ -15,7 +15,7 @@ import { Register } from "features/auth/Register"
 import { Route, Routes } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css';
 import { Post, Comment, CommentPost, LiveStream, Video } from 'features/layout';
-import { Recharge, History, HomeUser } from 'features/home';
+import { Recharge, History, HomeUser,Account as AccountUser } from 'features/home';
 import { getAllCategory } from 'utils/apis/category';
 import { ICategory } from 'models';
 
@@ -40,8 +40,9 @@ function App() {
             {/* User */}
             <Route path="/" element={<UserLayout />} >
               <Route path="home" element={<HomeUser />} />
-              <Route path="recharge" element={<Recharge />} />
+              <Route path="user-payment" element={<Recharge />} />
               <Route path="history" element={<History />} />
+              <Route path="account" element={<AccountUser />} />
               {menus?.map((menu) => (
                 <React.Fragment key={menu._id}>
                   {menu.children !== null && menu.children !== undefined && menu.children.map((child) => (

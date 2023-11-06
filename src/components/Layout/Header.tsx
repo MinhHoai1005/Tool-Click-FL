@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
@@ -11,10 +11,18 @@ interface HeaderProps {
     drawerWidth: number,
     handleDrawerToggle: Function
 }
+const user = localStorage.getItem('user')
 
 export const Header: React.FC<HeaderProps> = (props) => {
     const { drawerWidth, handleDrawerToggle } = props
     const navigate = useNavigate();
+    const [accounts, setAccounts] = useState({
+        email: '',
+        client_id: 0,
+        total: 0,
+
+    })
+
 
     const onClickDrawerToggle = () => {
         handleDrawerToggle()
@@ -27,10 +35,22 @@ export const Header: React.FC<HeaderProps> = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const handleLogout =()=>{
+    const handleLogout = () => {
         localStorage.clear();
         navigate('login')
     }
+    const handleAccount = () => {
+        navigate('account')
+    }
+    const handlePayment = () => {
+        navigate('user-payment')
+    }
+    useEffect(() => {
+        if (user) {
+            const userObject = JSON.parse(user);
+            setAccounts((account) => ({ ...account, 'client_id': userObject.client_id,'email': userObject.email,'total': userObject.total}));
+        }
+    }, [])
     return (
         <AppBar
             position="fixed"
@@ -57,12 +77,15 @@ export const Header: React.FC<HeaderProps> = (props) => {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                         onClick={handleClick}
+                        sx={{ display: 'grid', justifyItems: 'center' }}
                     >
                         <Avatar
                             alt="Remy Sharp"
                             src=""
-                            sx={{ width: 50, height: 50 }}
+                            sx={{ width: '30px', height: '30px' }}
                         />
+                        <Typography variant="caption">Khách hàng: {accounts.email} - ID :{accounts.client_id}</Typography>
+                        <Typography variant="caption">Số tiền: {accounts.total.toLocaleString('en-US')}</Typography>
                     </Button>
                     <Menu
                         id="basic-menu"
@@ -73,8 +96,8 @@ export const Header: React.FC<HeaderProps> = (props) => {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                        <MenuItem onClick={handleAccount}>Tài khoản</MenuItem>
+                        <MenuItem onClick={handlePayment}>Nạp tiền</MenuItem>
                         <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
                     </Menu>
                 </Typography>
