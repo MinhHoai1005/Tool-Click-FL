@@ -42,13 +42,13 @@ export const api = {
 
   // Money
   moneyAddByAdmin: {
-    url: domainWeb + 'recharge/add-byadmin',
+    url: domainWeb + 'user-payment/add-byadmin',
   },
   getAllMoney: {
-    url: domainWeb + 'recharge/getall',
+    url: domainWeb + 'user-payment/getall',
   },
   switchStausMoney: {
-    url: domainWeb + 'recharge/switch',
+    url: domainWeb + 'user-payment/switch',
   },
   userInfo: {
     url: domainWeb + '/cost/public-api/employee/info',
