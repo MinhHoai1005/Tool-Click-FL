@@ -76,7 +76,7 @@
 // register
 .register {
     position: relative;
-    background-color: rgba(0, 0, 0, 0.43);
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2FBackgroup%2Fphoto_2023-11-11_09-45-53.jpg?alt=media&token=e79754ba-b776-4f40-a020-a7c3e744656c");
     height: 100vh;
 
     .register-form {
@@ -124,3 +124,17 @@ h3 {
 .btn{
     cursor: pointer;
 }
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+  }
+  
+  .sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+  }
+  

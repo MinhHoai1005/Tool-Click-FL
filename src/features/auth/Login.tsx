@@ -28,9 +28,11 @@ function Login() {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (name === "email") {
       // Kiểm tra định dạng email và cập nhật trạng thái isValidEmail
-      if (validator.isEmail(value)) {
+      if (!emailRegex.test(value)) {
         setErrors((err) => ({ ...err, email: "Email không hợp lệ" }));
       }
     }

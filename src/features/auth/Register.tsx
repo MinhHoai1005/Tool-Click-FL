@@ -43,6 +43,9 @@ export const Register = () => {
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setInputs((inputs) => ({ ...inputs, [name]: value }));
+        // const phoneRegex = /^(0[0-9]{9,10})$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (errors.user_name !== "") {
             if (inputs.user_name === '') {
                 setErrors((err) => ({ ...err, user_name: "Vui lòng nhập tên tài khoản" }));
@@ -50,7 +53,11 @@ export const Register = () => {
                 setErrors((err) => ({ ...err, user_name: "" }));
             }
         }
-        if (errors.email != "") {
+        if (errors.email != "" ) {
+            // Kiểm tra định dạng email và cập nhật trạng thái isValidEmail
+            if (!emailRegex.test(value)) {
+                setErrors((err) => ({ ...err, email: "Email không hợp lệ" }));
+            }
             if (inputs.email === '') {
                 setErrors((err) => ({ ...err, email: "Vui lòng nhập email" }));
             } else {

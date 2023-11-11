@@ -93,3 +93,4 @@ v0.0.4 Logout
 v0.0.5 Config
 v0.0.6 ConfigBE
 v0.0.7 Header
+v0.0.7 Header Dashboard

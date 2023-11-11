@@ -70,9 +70,9 @@ export function UserLayout(props: UserLayoutProps) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
   useEffect(() => {
     setTabView(window.location.pathname)
+
     loadMenu();
   }, [])
   return (

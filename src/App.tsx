@@ -15,7 +15,7 @@ import { Register } from "features/auth/Register"
 import { Route, Routes } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css';
 import { Post, Comment, CommentPost, LiveStream, Video } from 'features/layout';
-import { Recharge, History, HomeUser,Account as AccountUser } from 'features/home';
+import { Recharge, History, HomeUser, Account as AccountUser } from 'features/home';
 import { getAllCategory } from 'utils/apis/category';
 import { ICategory } from 'models';
 
@@ -36,6 +36,11 @@ function App() {
       <BrowserRouter history={history}>
         <CssBaseline />
         <Routes>
+          {/* <Route path='login-toolplus' element={<Login></Login>} /> */}
+          <Route path='register' element={<Register />} />
+          <Route path='forgot-password/:id' element={<ForgotPassword />} />
+          <Route path='forgot-password' element={<ForgotPassword />} />
+          <Route path='login' element={<Login />} />
           <Route element={<PrivateRoutes />}>
             {/* User */}
             <Route path="/" element={<UserLayout />} >
@@ -47,11 +52,11 @@ function App() {
                 <React.Fragment key={menu._id}>
                   {menu.children !== null && menu.children !== undefined && menu.children.map((child) => (
                     <React.Fragment key={child.id}>
-                      <Route path={child.url} element={child.menu === '1' ? <Post id={child.id}name={'Buff like bài viết'} /> 
-                      : child.menu === '2' ? <Comment id={child.id} name={'Buff like comment'}/> 
-                      : child.menu === '3' ? <CommentPost id={child.id} name={'Buff comment bài viết'}/> 
-                      : child.menu === '4' ? <LiveStream id={child.id}name={'Buff mắt livestream'} /> 
-                      : <Video id={child.id} name='Buff view video'/>} />
+                      <Route path={child.url} element={child.menu === '1' ? <Post id={child.id} name={'Buff like bài viết'} />
+                        : child.menu === '2' ? <Comment id={child.id} name={'Buff like comment'} />
+                          : child.menu === '3' ? <CommentPost id={child.id} name={'Buff comment bài viết'} />
+                            : child.menu === '4' ? <LiveStream id={child.id} name={'Buff mắt livestream'} />
+                              : <Video id={child.id} name='Buff view video' />} />
                     </React.Fragment>
                   ))}
                 </React.Fragment>
@@ -65,11 +70,6 @@ function App() {
               </Route>
             </Route>
           </Route>
-          <Route path='/login-toolplus' element={<Login></Login>} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/forgot-password/:id' element={<ForgotPassword />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/login' element={<HomeLogin />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>

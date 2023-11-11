@@ -39,7 +39,9 @@ export const api = {
   switchStausAccount: {
     url: domainWeb + 'account/update-status',
   },
-
+  getDashboard:{
+    url: domainWeb + 'account/dashboard',
+  },
   // Money
   moneyAddByAdmin: {
     url: domainWeb + 'user-payment/add-byadmin',

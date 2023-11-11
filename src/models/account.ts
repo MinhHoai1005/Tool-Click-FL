@@ -23,3 +23,10 @@ export interface IAccount {
     status: number,
     created_date: Date,
 }
+export interface IDashboard {
+    earnings: number,
+    action: number,
+    pending: number,
+    category_name: string,
+    maxTotal: number,
+}
