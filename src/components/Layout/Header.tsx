@@ -20,7 +20,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
         email: '',
         client_id: 0,
         total: 0,
-
+        user_name: '',
     })
 
 
@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
     useEffect(() => {
         if (user) {
             const userObject = JSON.parse(user);
-            setAccounts((account) => ({ ...account, 'client_id': userObject.client_id,'email': userObject.email,'total': userObject.total}));
+            setAccounts((account) => ({ ...account, 'client_id': userObject.client_id,'email': userObject.email,'total': userObject.total,"user_name": userObject.user_name}));
         }
     }, [])
     return (
@@ -84,7 +84,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
                             src=""
                             sx={{ width: '30px', height: '30px' }}
                         />
-                        <Typography variant="caption">Khách hàng: {accounts.email} - ID :{accounts.client_id}</Typography>
+                        <Typography variant="caption">Khách hàng: {accounts.user_name} - ID :{accounts.client_id}</Typography>
                         <Typography variant="caption">Số tiền: {accounts.total.toLocaleString('en-US')}</Typography>
                     </Button>
                     <Menu

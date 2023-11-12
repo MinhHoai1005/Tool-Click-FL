@@ -29,6 +29,7 @@ export interface IDashboard {
     pending: number,
     category_name: string,
     maxTotal: number,
+    total:number,
 }
 export interface ILineChartMoeny{
     action: number[],

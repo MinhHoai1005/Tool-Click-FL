@@ -31,8 +31,8 @@ const Dashboard = () => {
                         <div className="row no-gutters align-items-center">
                             <div className="col mr-2">
                                 <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Số tiền đã sử dụng trong tháng</div>
-                                <div className="h5 mb-0 font-weight-bold text-gray-800">{dataTotal?.earnings.toLocaleString('en-US')}</div>
+                                    Tổng tiền nạp</div>
+                                <div className="h5 mb-0 font-weight-bold text-gray-800">{dataTotal?.total.toLocaleString('en-US')}</div>
                             </div>
                             <div className="col-auto">
                                 <i className="fas fa-calendar fa-2x text-gray-300" />
@@ -48,8 +48,8 @@ const Dashboard = () => {
                         <div className="row no-gutters align-items-center">
                             <div className="col mr-2">
                                 <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Số lệnh đang chờ duyệt trong tháng</div>
-                                <div className="h5 mb-0 font-weight-bold text-gray-800">{dataTotal?.pending.toLocaleString('en-US')}</div>
+                                Tổng tiền chạy</div>
+                                <div className="h5 mb-0 font-weight-bold text-gray-800">{dataTotal?.earnings.toLocaleString('en-US')}</div>
                             </div>
                             <div className="col-auto">
                                 <i className="fas fa-dollar-sign fa-2x text-gray-300" />
@@ -64,18 +64,12 @@ const Dashboard = () => {
                     <div className="card-body">
                         <div className="row no-gutters align-items-center">
                             <div className="col mr-2">
-                                <div className="text-xs font-weight-bold text-info text-uppercase mb-1">Tiến trình sử lý nhiều nhất
+                                <div className="text-xs font-weight-bold text-info text-uppercase mb-1">Số lệnh đã chạy
                                 </div>
                                 <div className="row no-gutters align-items-center">
                                     <div className="col-auto">
-                                        <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">Tiến trình: {dataTotal?.category_name}</div>
-                                        <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">Tổng tiền: {dataTotal?.maxTotal.toLocaleString('en-US')}</div>
+                                        <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">{dataTotal?.action.toLocaleString('en-US')}</div>
                                     </div>
-                                    {/* <div className="col">
-              <div className="progress progress-sm mr-2">
-                <div className="progress-bar bg-info" role="progressbar" style={{ width: '50%' }} aria-valuenow={50} aria-valuemin={0} aria-valuemax={100} />
-              </div>
-            </div> */}
                                 </div>
                             </div>
                             <div className="col-auto">
@@ -92,8 +86,8 @@ const Dashboard = () => {
                         <div className="row no-gutters align-items-center">
                             <div className="col mr-2">
                                 <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Số lệnh đã chạy trong tháng</div>
-                                <div className="h5 mb-0 font-weight-bold text-gray-800">{dataTotal?.action.toLocaleString('en-US')}</div>
+                                Số lệnh đang chạy</div>
+                                <div className="h5 mb-0 font-weight-bold text-gray-800">{dataTotal?.pending.toLocaleString('en-US')}</div>
                             </div>
                             <div className="col-auto">
                                 <i className="fas fa-comments fa-2x text-gray-300" />

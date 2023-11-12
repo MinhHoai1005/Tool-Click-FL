@@ -32,7 +32,6 @@ export default function Sidebar(props: Props) {
     const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [open, setOpen] = React.useState<string>('');
-    const [url, setUrl] = React.useState<string>('');
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -70,7 +69,7 @@ export default function Sidebar(props: Props) {
                                 </ListItemIcon>
 
                                 <ListItemText primary={item.name} />
-                                {disable &&item.children !=null && item.children.length > 0 && (
+                                {disable && item.children != null && item.children.length > 0 && (
                                     <ListItemIcon>
                                         {open === item._id ? <ExpandLess /> : <ExpandMore />}
                                     </ListItemIcon>
@@ -79,15 +78,15 @@ export default function Sidebar(props: Props) {
                             </ListItemButton>
                         </ListItem>
                         <Collapse in={open === item._id ? true : false} timeout="auto" unmountOnExit >
-                            {item.children !=null && item.children.map((child) => (
+                            {item.children != null && item.children.map((child) => (
                                 <List component="div" disablePadding key={child.id}>
                                     <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickLink(child.url)}
                                         className={classnames({
-                                            "list-item-active": window.location.pathname.replace('/','') === child.url|| window.location.pathname === child.url,
+                                            "list-item-active": window.location.pathname.replace('/', '') === child.url || window.location.pathname === child.url,
                                         })}
                                     >
                                         <ListItemIcon>
-                                            {window.location.pathname.replace('/','')  === child.url ? (
+                                            {window.location.pathname.replace('/', '') === child.url|| window.location.pathname === child.url ? (
                                                 <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#FFC100", }} />
                                             ) : (
                                                 <img src={child.image} alt={child.name} style={{ width: '20px', height: '20px' }} />
@@ -109,11 +108,15 @@ export default function Sidebar(props: Props) {
 
     const container = windows !== undefined ? () => windows().document.body : undefined;
     const loadCategoryId = async (url: string) => {
-        let data = await getCategoryId(url)
-        if (data.code === 200) {
-            setOpen(data.data.id)
-            setUrl(data.data.url)
+        if (url === "" || url === "/home" || url === "/history" || url === "/payment") {
+            setOpen("1")
+        } else {
+            let data = await getCategoryId(url)
+            if (data.code === 200) {
+                setOpen(data.data.id)
+            }
         }
+
     }
     React.useEffect(() => {
         let url = window.location.pathname
