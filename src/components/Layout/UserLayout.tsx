@@ -22,7 +22,6 @@ export function UserLayout(props: UserLayoutProps) {
 
   const [menus, setMenus] = useState<ICategory[]>()
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [tabView, setTabView] = useState<string>("home")
   const [sidebars, setSidebars] = useState([{
     _id: "1",
     name: 'Home',
@@ -71,8 +70,6 @@ export function UserLayout(props: UserLayoutProps) {
     setMobileOpen(!mobileOpen);
   };
   useEffect(() => {
-    setTabView(window.location.pathname)
-
     loadMenu();
   }, [])
   return (
@@ -87,6 +84,7 @@ export function UserLayout(props: UserLayoutProps) {
       >
         <Toolbar />
         <Routes>
+          <Route path="" element={<HomeUser />} />
           <Route path="home" element={<HomeUser />} />
           <Route path="user-payment" element={<Recharge />} />
           <Route path="history" element={<History />} />

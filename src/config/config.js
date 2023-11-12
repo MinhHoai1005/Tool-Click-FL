@@ -1,4 +1,4 @@
-// export const domainWeb = 'http://localhost:8085/public-api/';
+// export const domainWeb = 'http://localhost:8080/public-api/';
 export const domainWeb = 'https://api.toolplus.click/public-api/';
 
 export const Firebase = {
@@ -41,6 +41,9 @@ export const api = {
   },
   getDashboard:{
     url: domainWeb + 'account/dashboard',
+  },
+  getLineChartMoney:{
+    url: domainWeb + 'account/line-chart-money',
   },
   // Money
   moneyAddByAdmin: {
@@ -123,6 +126,12 @@ export const api = {
   },
   processClientID: {
     url: domainWeb + 'process/client_id',
+  },
+  getPieChartCategory:{
+    url: domainWeb + 'process/pie-chart-category',
+  },
+  getPieChartCategoryAction:{
+    url: domainWeb + 'process/pie-chart-category-action',
   },
   //File
   uploadFile: {

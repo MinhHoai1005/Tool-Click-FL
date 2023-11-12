@@ -17,3 +17,8 @@ export interface ICategoryId {
     id: string,
     url: string,
 }
+export interface IPieChart{
+    id: string,
+    value: number,
+    label:string,
+}

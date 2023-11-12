@@ -30,3 +30,7 @@ export interface IDashboard {
     category_name: string,
     maxTotal: number,
 }
+export interface ILineChartMoeny{
+    action: number[],
+    amount_used: number[],
+}

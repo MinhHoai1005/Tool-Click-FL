@@ -87,9 +87,9 @@ function Login() {
     <div className='register'>
       <ToastContainer />
       <form className='register-form' style={{ minHeight: '300px' }}>
-        <div className='form-close'>
+        {/* <div className='form-close'>
           <FontAwesomeIcon icon={faXmark} />
-        </div>
+        </div> */}
         <h3>Đăng nhập tài khoản</h3>
         <TextField
           label={
