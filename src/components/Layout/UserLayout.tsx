@@ -94,11 +94,11 @@ export function UserLayout(props: UserLayoutProps) {
             <React.Fragment key={menu._id}>
               {menu.children !== null && menu.children !== undefined && menu.children.map((child) => (
                 <React.Fragment key={child.id}>
-                  <Route path={child.url} element={child.menu === '1' ? <Post id={child.id} name={'Buff like bài viết'} />
-                    : child.menu === '2' ? <Comment id={child.id} name={'Buff like comment'} />
-                      : child.menu === '3' ? <CommentPost id={child.id} name={'Buff comment bài viết'} />
-                        : child.menu === '4' ? <LiveStream id={child.id} name={'Buff mắt livestream'} />
-                          : <Video id={child.id} name='Buff view video' />} />
+                  <Route path={child.url} element={child.menu === '1' ? <Post id={child.id} name={child.name} />
+                    : child.menu === '2' ? <Comment id={child.id}  name={child.name}  />
+                      : child.menu === '3' ? <CommentPost id={child.id} name={child.name}  />
+                        : child.menu === '4' ? <LiveStream id={child.id} name={child.name}  />
+                          : <Video id={child.id} name={child.name}  />} />
                 </React.Fragment>
               ))}
             </React.Fragment>

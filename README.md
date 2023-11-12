@@ -51,3 +51,4 @@ v0.0.8 Header Dashboard
 v0.0.9 Header Dashboard Pie
 v0.0.10 Payment
 v0.0.11 Sidebar Child null
+v0.0.12 name Menu Category
