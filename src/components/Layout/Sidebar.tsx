@@ -70,7 +70,7 @@ export default function Sidebar(props: Props) {
                                 </ListItemIcon>
 
                                 <ListItemText primary={item.name} />
-                                {disable && item.children.length > 0 && (
+                                {disable &&item.children !=null && item.children.length > 0 && (
                                     <ListItemIcon>
                                         {open === item._id ? <ExpandLess /> : <ExpandMore />}
                                     </ListItemIcon>
@@ -79,7 +79,7 @@ export default function Sidebar(props: Props) {
                             </ListItemButton>
                         </ListItem>
                         <Collapse in={open === item._id ? true : false} timeout="auto" unmountOnExit >
-                            {item.children.map((child) => (
+                            {item.children !=null && item.children.map((child) => (
                                 <List component="div" disablePadding key={child.id}>
                                     <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickLink(child.url)}
                                         className={classnames({
