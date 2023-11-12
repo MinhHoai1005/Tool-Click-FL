@@ -43,7 +43,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
         navigate('account')
     }
     const handlePayment = () => {
-        navigate('user-payment')
+        navigate('payment')
     }
     useEffect(() => {
         if (user) {

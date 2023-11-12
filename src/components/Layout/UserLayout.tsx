@@ -39,7 +39,7 @@ export function UserLayout(props: UserLayoutProps) {
       {
         id: "12",
         name: 'Nạp tiền',
-        url: '/user-payment',
+        url: '/payment',
         image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fwallet.svg?alt=media&token=763ef16f-02a5-4d38-8491-547d06a0c4ee&_gl=1*vr4ps6*_ga*NTg1ODg5MjYyLjE2Njk5ODM1NTg.*_ga_CW55HF8NVT*MTY5ODQ3Njc5Mi4zNS4xLjE2OTg0NzcwMDYuNTMuMC4w',
         menu: '',
       },
