@@ -47,16 +47,13 @@ export const api = {
   },
   // Money
   moneyAddByAdmin: {
-    url: domainWeb + 'user-payment/add-byadmin',
+    url: domainWeb + 'payment/add-byadmin',
   },
   getAllMoney: {
-    url: domainWeb + 'user-payment/getall',
+    url: domainWeb + 'payment/getall',
   },
   switchStausMoney: {
-    url: domainWeb + 'user-payment/switch',
-  },
-  userInfo: {
-    url: domainWeb + '/cost/public-api/employee/info',
+    url: domainWeb + 'payment/switch',
   },
 
   //Category

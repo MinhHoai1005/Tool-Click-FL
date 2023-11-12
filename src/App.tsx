@@ -9,13 +9,12 @@ import PrivateRoutes from "components/Common/PrivateRoutes"
 import { AdminLayout, UserLayout } from "components/Layout"
 import { Account, Category, Money, Setting } from "features/admin"
 import { ForgotPassword } from "features/auth/ForgotPassword"
-import HomeLogin from "features/auth/HomeLogin"
 import Login from "features/auth/Login"
 import { Register } from "features/auth/Register"
 import { Route, Routes } from "react-router-dom"
 import 'react-toastify/dist/ReactToastify.css';
 import { Post, Comment, CommentPost, LiveStream, Video } from 'features/layout';
-import { Recharge, History, HomeUser, Account as AccountUser } from 'features/home';
+import { Payment, History, HomeUser, Account as AccountUser } from 'features/home';
 import { getAllCategory } from 'utils/apis/category';
 import { ICategory } from 'models';
 
@@ -45,7 +44,7 @@ function App() {
             {/* User */}
             <Route path="/" element={<UserLayout />} >
               <Route path="home" element={<HomeUser />} />
-              <Route path="user-payment" element={<Recharge />} />
+              <Route path="payment" element={<Payment />} />
               <Route path="history" element={<History />} />
               <Route path="account" element={<AccountUser />} />
               {menus?.map((menu) => (

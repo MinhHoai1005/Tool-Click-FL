@@ -49,3 +49,4 @@ v0.0.6 ConfigBE
 v0.0.7 Header
 v0.0.8 Header Dashboard
 v0.0.9 Header Dashboard Pie
+v0.0.10 Payment

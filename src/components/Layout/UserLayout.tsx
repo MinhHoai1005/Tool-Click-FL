@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Header } from './Header';
 import Sidebar from './Sidebar';
-import { Recharge, History, HomeUser, Account } from 'features/home';
+import { Payment, History, HomeUser, Account } from 'features/home';
 import { Route, Routes } from 'react-router-dom';
 import { Setting } from 'features/admin';
 import { Toolbar } from '@mui/material';
@@ -86,7 +86,7 @@ export function UserLayout(props: UserLayoutProps) {
         <Routes>
           <Route path="" element={<HomeUser />} />
           <Route path="home" element={<HomeUser />} />
-          <Route path="user-payment" element={<Recharge />} />
+          <Route path="payment" element={<Payment />} />
           <Route path="history" element={<History />} />
           <Route path="setting" element={<Setting />} />
           <Route path="account" element={<Account />} />
