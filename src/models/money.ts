@@ -37,3 +37,13 @@ export interface IHistoryUser {
     status: number,
     created_date: Date,
 }
+export interface IProcessUser {
+    _id: string,
+    client_id: string,
+    category: string,
+    link:string,
+    note:string,
+    total: number,
+    status: number,
+    created_date: Date,
+}

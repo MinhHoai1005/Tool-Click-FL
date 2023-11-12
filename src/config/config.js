@@ -45,6 +45,9 @@ export const api = {
   getLineChartMoney:{
     url: domainWeb + 'account/line-chart-money',
   },
+  getAccount: {
+    url: domainWeb + 'account/all',
+  },
   // Money
   moneyAddByAdmin: {
     url: domainWeb + 'payment/add-byadmin',
@@ -129,6 +132,12 @@ export const api = {
   },
   getPieChartCategoryAction:{
     url: domainWeb + 'process/pie-chart-category-action',
+  },
+  processAll:{
+    url: domainWeb + 'process/all',
+  },
+  updateStatusProcess:{
+    url: domainWeb + 'process/update-status',
   },
   //File
   uploadFile: {

@@ -1,5 +1,5 @@
 import { Box, CssBaseline, Toolbar } from '@mui/material';
-import { Account, Category, Money, Setting } from 'features/admin';
+import { Account, Category, Money, Setting,Process } from 'features/admin';
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './Header';
@@ -35,6 +35,14 @@ const menu = [{
 },
 {
   _id: '4',
+  name: 'Tiến trình',
+  url: '/admin/process',
+  image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fwallet.svg?alt=media&token=763ef16f-02a5-4d38-8491-547d06a0c4ee&_gl=1*vr4ps6*_ga*NTg1ODg5MjYyLjE2Njk5ODM1NTg.*_ga_CW55HF8NVT*MTY5ODQ3Njc5Mi4zNS4xLjE2OTg0NzcwMDYuNTMuMC4w',
+  children: [],
+  menu: '',
+},
+{
+  _id: '5',
   name: 'Cài đặt',
   url: '/admin/setting',
   image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fgear-solid.svg?alt=media&token=a42f53fd-642a-44d6-ac82-b3b6a125b59f&_gl=1*iqjmj9*_ga*NTg1ODg5MjYyLjE2Njk5ODM1NTg.*_ga_CW55HF8NVT*MTY5ODQ3Njc5Mi4zNS4xLjE2OTg0NzY4NDMuOS4wLjA.',
@@ -64,6 +72,7 @@ export const AdminLayout = () => {
           <Route path="account" element={<Account />} />
           <Route path="category" element={<Category />} />
           <Route path="money" element={<Money />} />
+          <Route path="process" element={<Process />} />
           <Route path="setting" element={<Setting />} >
           </Route>
           <Route path="payment" element={<Payment />} />

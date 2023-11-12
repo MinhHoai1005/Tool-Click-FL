@@ -94,3 +94,8 @@ export const getPieChartCategoryAction = async (start_date: moment.Moment, end_d
     const response = await Fetch.Post<IPieChart[]>(url, body)
     return response
 }
+export const getAccount = async () => {
+    const url = api.getAccount.url
+    const response = await Fetch.Post<IAccount[]>(url)
+    return response
+}

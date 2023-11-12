@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react'
 import './style.scss'
 import moment from 'moment'
 import { IAccount } from 'models';
-import { getAllAccount, switchStausAccount } from 'utils/apis/account';
+import { getAllAccount, switchStausAccount,getAccount } from 'utils/apis/account';
 import { toast } from 'react-toastify';
 import { DialogMoney } from 'components/Common';
 interface Column {
@@ -37,6 +37,7 @@ export const Account: React.FC<AccountProps> = (props) => {
 
   const [keyword, setKeyWord] = useState<number>(0);
   const [rows, setRows] = useState<IAccount[]>([]);
+  const [options, setOptions] = useState<IAccount[]>([]);
   const [open, setOpen] = useState(false);
 
   const [page, setPage] = React.useState(0);
@@ -69,14 +70,22 @@ export const Account: React.FC<AccountProps> = (props) => {
       setRows(data.data)
     }
   }
+
   const showDialog = () => {
     setOpen(!open);
   }
   const handleChange = (event, newValue) => {
     loadAccount(newValue?.client_id, page, rowsPerPage)
   };
+  const loadAll =async()=>{
+    let data = await getAccount()
+    if (data.code === 200) {
+      setOptions(data.data)
+    }
+  }
   useEffect(() => {
     loadAccount(0, page, rowsPerPage)
+    loadAll()
   }, [])
   return (
     <Box sx={{ m: 2, borderRadius: '1px' }} className='admin-account'>
@@ -86,7 +95,7 @@ export const Account: React.FC<AccountProps> = (props) => {
         <Autocomplete
           onChange={handleChange}
           id="searchable-select"
-          options={rows === undefined ? [] : rows}
+          options={options === undefined ? [] : options}
           getOptionLabel={(option) => `${option.client_id} - ${option.user_name}`}
           renderInput={(params) => <TextField {...params} label="Người dùng" />}
           sx={{width: '50%'}}

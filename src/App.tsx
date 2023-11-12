@@ -7,7 +7,7 @@ import { history } from 'utils';
 import { NotFound } from "components/Common"
 import PrivateRoutes from "components/Common/PrivateRoutes"
 import { AdminLayout, UserLayout } from "components/Layout"
-import { Account, Category, Money, Setting } from "features/admin"
+import { Account, Category, Money, Setting,Process } from "features/admin"
 import { ForgotPassword } from "features/auth/ForgotPassword"
 import Login from "features/auth/Login"
 import { Register } from "features/auth/Register"
@@ -65,6 +65,7 @@ function App() {
               <Route path="account" element={<Account />} />
               <Route path="category" element={<Category />} />
               <Route path="money" element={<Money />} />
+              <Route path="process" element={<Process />} />
               <Route path="setting" element={<Setting />} >
               </Route>
             </Route>
