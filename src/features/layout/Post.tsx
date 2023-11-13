@@ -127,7 +127,7 @@ export const Post: React.FC<PostProps> = (props) => {
                     dangerouslySetInnerHTML={{
                       __html: Note.note,
                     }}
-                    style={{ border: '1px solid', borderRadius: '5px', padding: '16.5px 14px', borderColor: 'rgba(0, 0, 0, 0.23)', color: '#e46a76' }}
+                    style={{ border: '1px solid #e9ecef ', borderRadius: '5px', padding: '16.5px 14px', color: '#e46a76' }}
                   ></div>
                 </Box>
                 <Box sx={{ display: 'flex', mt: 2 }}>
@@ -166,7 +166,7 @@ export const Post: React.FC<PostProps> = (props) => {
                   dangerouslySetInnerHTML={{
                     __html: Note.attention,
                   }}
-                  style={{ border: '1px solid', borderRadius: '5px', padding: '16.5px 14px', borderColor: 'rgba(0, 0, 0, 0.23)', background: '#FFA192' }}
+                  style={{ border: '1px solid #e9ecef', borderRadius: '5px', padding: '16.5px 14px', background: '#FFA192' }}
                 ></div>
               </Box>
             </Box>

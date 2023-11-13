@@ -1,7 +1,7 @@
 import { api } from "config/config"
-import { IAccount, IDashboard, Response,ILineChartMoeny, IPieChart } from "models"
+import { IAccount, IDashboard, Response,ILineChartMoeny, IPieChart,IAccountUpdate } from "models"
 import { Fetch } from "utils/fetch"
-
+import { setItemLocalStorage } from "utils"
 
 export const getAllAccount = async (client_id: number, page: number, page_size: number) => {
     const url = api.getAllAccount.url
@@ -98,4 +98,23 @@ export const getAccount = async () => {
     const url = api.getAccount.url
     const response = await Fetch.Post<IAccount[]>(url)
     return response
+}
+export const updateAccount = async (account:IAccountUpdate) => {
+    const url = api.updateAccount.url
+    const user = localStorage.getItem('user')
+    let client_id = 0
+    if (user) {
+        const jsonObject = JSON.parse(user);
+        client_id = jsonObject.client_id
+    }
+    const body = {
+        account: account,
+        client_id:client_id,
+    }
+    const response = await Fetch.Post<IAccountUpdate>(url,body)
+    if (response.code == 200) {
+        setItemLocalStorage("user", JSON.stringify(response.data))
+    }
+    return response
+    
 }

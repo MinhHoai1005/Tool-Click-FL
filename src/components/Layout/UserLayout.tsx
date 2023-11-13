@@ -73,7 +73,7 @@ export function UserLayout(props: UserLayoutProps) {
     loadMenu();
   }, [])
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', backgroundColor: '#EFFAFC' }}>
       <ToastContainer />
       <CssBaseline />
       <Header drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
@@ -95,10 +95,10 @@ export function UserLayout(props: UserLayoutProps) {
               {menu.children !== null && menu.children !== undefined && menu.children.map((child) => (
                 <React.Fragment key={child.id}>
                   <Route path={child.url} element={child.menu === '1' ? <Post id={child.id} name={child.name} />
-                    : child.menu === '2' ? <Comment id={child.id}  name={child.name}  />
-                      : child.menu === '3' ? <CommentPost id={child.id} name={child.name}  />
-                        : child.menu === '4' ? <LiveStream id={child.id} name={child.name}  />
-                          : <Video id={child.id} name={child.name}  />} />
+                    : child.menu === '2' ? <Comment id={child.id} name={child.name} />
+                      : child.menu === '3' ? <CommentPost id={child.id} name={child.name} />
+                        : child.menu === '4' ? <LiveStream id={child.id} name={child.name} />
+                          : <Video id={child.id} name={child.name} />} />
                 </React.Fragment>
               ))}
             </React.Fragment>

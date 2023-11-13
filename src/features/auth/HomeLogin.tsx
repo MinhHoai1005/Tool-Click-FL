@@ -49,7 +49,7 @@ function HomeLogin() {
     };
 
     const loginWithToolPlus = () => {
-        navigate('/login-toolplus');
+        navigate('/login');
     }
     return (
         <div className='home-login'>

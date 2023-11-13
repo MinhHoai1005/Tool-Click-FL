@@ -105,7 +105,7 @@ export const Register = () => {
         let res = await register(inputs.user_name, inputs.email, inputs.phone, inputs.password)
         if (res.code == 200) {
             toast.success('Đăng ký thành công')
-            window.setTimeout(() => { navigate('/login-toolplus') }, 1000)
+            window.setTimeout(() => { navigate('/login') }, 1000)
         } else {
             toast.error(res.message)
         }

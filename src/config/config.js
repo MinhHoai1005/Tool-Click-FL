@@ -48,6 +48,9 @@ export const api = {
   getAccount: {
     url: domainWeb + 'account/all',
   },
+  updateAccount: {
+    url: domainWeb + 'account/update',
+  },
   // Money
   moneyAddByAdmin: {
     url: domainWeb + 'payment/add-byadmin',

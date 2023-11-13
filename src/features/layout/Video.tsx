@@ -83,7 +83,7 @@ export const Video: React.FC<VideoProps> = (props) => {
                     dangerouslySetInnerHTML={{
                       __html: Note.video_comment,
                     }}
-                    style={{ border: '1px solid', borderRadius: '5px', padding: '16.5px 14px', borderColor: 'rgba(0, 0, 0, 0.23)', color: '#e46a76' }}
+                    style={{ border: '1px solid #e9ecef', borderRadius: '5px', padding: '16.5px 14px', color: '#e46a76' }}
                   ></div>
                 </Box>
                 <Box sx={{ display: 'flex', mt: 2 }}>
@@ -96,7 +96,7 @@ export const Video: React.FC<VideoProps> = (props) => {
                 </Box>
                 <Box sx={{ display: 'flex', mt: 2 }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}></Typography>
-                  <div style={{ border: '1px solid', borderRadius: '5px', width: '100%', padding: '16.5px 14px', borderColor: '#fee2d9', backgroundColor: '#feeae4' }}>
+                  <div style={{ border: '1px solid #e9ecef ', borderRadius: '5px', width: '100%', padding: '16.5px 14px', backgroundColor: '#feeae4' }}>
                     <div style={{ color: '#834e3e', fontWeight: 'bold' }}>{"Giá tiền 1 view = "}{price}{" Xu x (thời gian xem video)"}</div>
                     <div style={{ color: '#1FAB89' }}>Mẹo nhỏ: Thời gian xem càng dài thì View càng chất lượng, vui lòng tùy chỉnh cho phù hợp với mục đích của bạn!</div>
                   </div>
@@ -128,7 +128,7 @@ export const Video: React.FC<VideoProps> = (props) => {
                   dangerouslySetInnerHTML={{
                     __html: Note.attention,
                   }}
-                  style={{ border: '1px solid', borderRadius: '5px', padding: '16.5px 14px', borderColor: 'rgba(0, 0, 0, 0.23)', background: '#FFA192' }}
+                  style={{ border: '1px solid #e9ecef', borderRadius: '5px', padding: '16.5px 14px', background: '#FFA192' }}
                 ></div>
               </Box>
             </Box>

@@ -85,14 +85,10 @@ export default function Sidebar(props: Props) {
                                             "list-item-active": window.location.pathname.replace('/', '') === child.url || window.location.pathname === child.url,
                                         })}
                                     >
-                                        <ListItemIcon>
-                                            {window.location.pathname.replace('/', '') === child.url|| window.location.pathname === child.url ? (
+                                        <ListItemIcon style={{ minWidth: ' 20px !important' }}>
+                                            {(window.location.pathname.replace('/', '') === child.url || window.location.pathname === child.url) && (
                                                 <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#FFC100", }} />
-                                            ) : (
-                                                <img src={child.image} alt={child.name} style={{ width: '20px', height: '20px' }} />
                                             )}
-
-
                                         </ListItemIcon>
                                         <ListItemText primary={child.name} />
                                     </ListItemButton>
@@ -128,7 +124,6 @@ export default function Sidebar(props: Props) {
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
             aria-label="mailbox folders"
         >
-            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
             <Drawer
                 container={container}
                 variant="temporary"
@@ -140,6 +135,7 @@ export default function Sidebar(props: Props) {
                 sx={{
                     display: { xs: 'block', sm: 'none' },
                     '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+                    , background: '#007DC4'
                 }}
             >
                 {drawer}
@@ -149,6 +145,7 @@ export default function Sidebar(props: Props) {
                 sx={{
                     display: { xs: 'none', sm: 'block' },
                     '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+                    , background: '#007DC4'
                 }}
                 open
             >

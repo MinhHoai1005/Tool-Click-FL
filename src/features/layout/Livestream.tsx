@@ -118,7 +118,7 @@ export const LiveStream: React.FC<LiveStreamProps> = (props) => {
                   dangerouslySetInnerHTML={{
                     __html: Note.attention,
                   }}
-                  style={{ border: '1px solid', borderRadius: '5px', padding: '16.5px 14px', borderColor: 'rgba(0, 0, 0, 0.23)', background: '#FFA192' }}
+                  style={{ border: '1px solid #e9ecef', borderRadius: '5px', padding: '16.5px 14px', background: '#FFA192' }}
                 ></div>
               </Box>
             </Box>

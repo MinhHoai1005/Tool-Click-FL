@@ -35,3 +35,14 @@ export interface ILineChartMoeny{
     action: number[],
     amount_used: number[],
 }
+export interface IAccountUpdate{
+    email: string,
+    client_id: number,
+    total: number,
+    user_name: string,
+    phone: string,
+    facebook: string,
+    pass_word: string,
+    new_pass_word: string,
+    reply_pass_word: string,
+}

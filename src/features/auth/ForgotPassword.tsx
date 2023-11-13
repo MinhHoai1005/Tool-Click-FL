@@ -94,7 +94,7 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = (props) => {
       toast.error(res.message)
     } else {
       toast.success('Đã đổi mật khẩu thành công')
-      window.setTimeout(() => { navigate('/login-toolplus') }, 1000)
+      window.setTimeout(() => { navigate('/login') }, 1000)
     }
   }
   const handleClickShowPassword = () => setShow((show) => !show);

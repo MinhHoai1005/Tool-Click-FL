@@ -58,7 +58,7 @@ export const AdminLayout = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', backgroundColor: '#EFFAFC'  }}>
       <ToastContainer />
       <CssBaseline />
       <Header drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />

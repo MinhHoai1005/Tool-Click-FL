@@ -80,15 +80,15 @@ export const Comment: React.FC<CommentProps> = (props) => {
                   <TextField variant="outlined" fullWidth multiline value={url} onChange={(e) => setUrl(e.target.value)} />
                 </Box>
                 <Box sx={{ display: 'flex', mt: 2 }}>
-                  <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Số lượng cần tăng:</Typography>
+                  <Typography sx={{ minWidth: '200px', alignSelf: 'center', border: '1px solid #e9ecef' }}>Số lượng cần tăng:</Typography>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: Note.note,
                     }}
-                    style={{ border: '1px solid', borderRadius: '5px', padding: '16.5px 14px', borderColor: 'rgba(0, 0, 0, 0.23)', color: '#e46a76' }}
+                    style={{ border: '1px solid #e9ecef', borderRadius: '5px', padding: '16.5px 14px', color: '#e46a76' }}
                   ></div>
                 </Box>
-                <Box sx={{ display: 'flex', mt: 2 }}>
+                <Box sx={{ display: 'flex', mt: 2 }}className='text-field-div' >
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Số lượng cần tăng:</Typography>
                   <TextField variant="outlined" fullWidth value={quantity.toLocaleString('en-US')} onChange={(e) => setQuantity(formatIntToString(e.target.value))} />
                 </Box>
@@ -124,7 +124,7 @@ export const Comment: React.FC<CommentProps> = (props) => {
                   dangerouslySetInnerHTML={{
                     __html: Note.attention,
                   }}
-                  style={{ border: '1px solid', borderRadius: '5px', padding: '16.5px 14px', borderColor: 'rgba(0, 0, 0, 0.23)', background: '#FFA192' }}
+                  style={{ border: '1px solid #e9ecef', borderRadius: '5px', padding: '16.5px 14px', background: '#FFA192' }}
                 ></div>
               </Box>
             </Box>
