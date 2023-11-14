@@ -5,7 +5,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import React, { useEffect, useState } from 'react'
 import { formatIntToString } from 'utils';
-import './styles.scss'
+import './styles.css'
 import { getPriceLike } from 'utils/apis/setting';
 import { Note } from './data'
 import { History } from './History'
@@ -77,10 +77,11 @@ export const Comment: React.FC<CommentProps> = (props) => {
               <Box >
                 <Box sx={{ display: 'flex' }}>
                   <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Link hoặc ID bài viết:</Typography>
-                  <TextField variant="outlined" fullWidth multiline value={url} onChange={(e) => setUrl(e.target.value)} />
+                  <textarea  style={{width:'100%',    border: '1px solid rgb(233, 236, 239)',borderRadius: '5px',paddingLeft:'5px'}} value={url} onChange={(e) => setUrl(e.target.value)} />
+                  {/* <TextField variant="outlined" fullWidth multiline value={url} onChange={(e) => setUrl(e.target.value)} /> */}
                 </Box>
                 <Box sx={{ display: 'flex', mt: 2 }}>
-                  <Typography sx={{ minWidth: '200px', alignSelf: 'center', border: '1px solid #e9ecef' }}>Số lượng cần tăng:</Typography>
+                  <Typography sx={{ minWidth: '200px', alignSelf: 'center' }}>Số lượng cần tăng:</Typography>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: Note.note,

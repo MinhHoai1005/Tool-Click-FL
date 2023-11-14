@@ -1,11 +1,8 @@
 .list-item-active {
-    color: #FFC100 !important;
-    // 
+    color: #CD6632 !important;
 }
-.css-1mk9mw3-MuiList-root{
-    .css-cveggr-MuiListItemIcon-root{
+.css-1mk9mw3-MuiList-root .css-cveggr-MuiListItemIcon-root{
         min-width: 25px !important;
-    }
 }
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline{
     border: 1px solid #e9ecef !important;

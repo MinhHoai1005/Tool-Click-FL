@@ -49,7 +49,7 @@ export const api = {
     url: domainWeb + 'account/all',
   },
   updateAccount: {
-    url: domainWeb + 'account/update',
+    url: domainWeb + 'account/user-update',
   },
   // Money
   moneyAddByAdmin: {

@@ -1,7 +1,5 @@
-.layout-post {
-    .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
+.layout-post .css-md26zr-MuiInputBase-root-MuiOutlinedInput-root { 
         height: 40px;
-    }
 }
 
 .happy-click-img {
@@ -10,9 +8,7 @@
     border: 2px solid blue;
     border-radius: 100%;
 }
-
-.text-field-div {
-    div {
-        border: 1px solid #e9ecef !important;
-    }
+.css-igs3ac{
+    border: 0px solid rgb(233, 236, 239);
+    border-radius: 5px;
 }

@@ -4,7 +4,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import React, { useEffect, useState } from 'react'
 import { formatIntToString } from 'utils';
-import './styles.scss'
+import './styles.css'
 import { getAllSetting, getPrice } from 'utils/apis/setting';
 import { ISetting, IConfig } from 'models';
 import classnames from "classnames";

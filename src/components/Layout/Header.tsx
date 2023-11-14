@@ -49,6 +49,9 @@ export const Header: React.FC<HeaderProps> = (props) => {
         if (user) {
             const userObject = JSON.parse(user);
             setAccounts((account) => ({ ...account, 'client_id': userObject.client_id,'email': userObject.email,'total': userObject.total,"user_name": userObject.user_name}));
+            if (userObject.total !== undefined && userObject.total>0){
+                setAccounts((account)=>({...account, 'total': userObject.total}))
+            }
         }
     }, [])
     return (
@@ -77,15 +80,15 @@ export const Header: React.FC<HeaderProps> = (props) => {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                         onClick={handleClick}
-                        sx={{ display: 'grid', justifyItems: 'center' }}
+                        sx={{ display: 'grid', justifyItems: 'center',textTransform:'none',color: 'black' }}
                     >
                         <Avatar
                             alt="Remy Sharp"
                             src=""
                             sx={{ width: '30px', height: '30px' }}
                         />
-                        <Typography variant="caption">Khách hàng: {accounts.user_name} - ID :{accounts.client_id}</Typography>
-                        <Typography variant="caption">Số tiền: {accounts.total.toLocaleString('en-US')}</Typography>
+                        <Typography variant="caption">Khách hàng: <strong style={{color:'#1976d2'}}>{accounts.user_name} </strong> - ID :<strong style={{color:'#1976d2'}}>{accounts.client_id} </strong></Typography>
+                        <Typography variant="caption">Số tiền: <strong style={{color:'#1976d2'}}> {accounts?.total.toLocaleString('en-US')}</strong></Typography>
                     </Button>
                     <Menu
                         id="basic-menu"

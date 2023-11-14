@@ -1,3 +1,4 @@
+
 export interface RPUser {
     token: string,
     data: IUser
@@ -8,6 +9,7 @@ export interface IUser {
     user_name: string
     email: string
     total: number,
+    phone:string,
     created_date: Date
 }
 export interface IPermissionCheckList {

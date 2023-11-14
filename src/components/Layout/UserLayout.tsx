@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "./style.scss";
+import "./style.css";
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Header } from './Header';
@@ -25,8 +25,8 @@ export function UserLayout(props: UserLayoutProps) {
   const [sidebars, setSidebars] = useState([{
     _id: "1",
     name: 'Home',
-    image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fhome.svg?alt=media&token=8ba4c82c-e3e6-4bdb-9638-1a8cf04a7956&_gl=1*dct06h*_ga*NTg1ODg5MjYyLjE2Njk5ODM1NTg.*_ga_CW55HF8NVT*MTY5ODQ3Njc5Mi4zNS4xLjE2OTg0NzY5MDguMTUuMC4w',
-    url: '',
+    image: 'https://firebasestorage.googleapis.com/v0/b/toolplus-3ea83.appspot.com/o/2023%2Fhome_7887689.png?alt=media&token=e7985c34-45d6-45d1-90d4-8375a54c87b9',
+    url: '/',
     menu: '',
     children: [
       {

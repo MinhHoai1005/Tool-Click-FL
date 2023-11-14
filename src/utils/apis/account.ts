@@ -112,7 +112,7 @@ export const updateAccount = async (account:IAccountUpdate) => {
         client_id:client_id,
     }
     const response = await Fetch.Post<IAccountUpdate>(url,body)
-    if (response.code == 200) {
+    if (response.code === 200) {
         setItemLocalStorage("user", JSON.stringify(response.data))
     }
     return response

@@ -5,7 +5,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import React, { useEffect, useState } from 'react'
 import { formatIntToString } from 'utils';
-import './styles.scss'
+import './styles.css'
 import { getPriceLike } from 'utils/apis/setting';
 import { Note } from './data'
 import { History } from './History'

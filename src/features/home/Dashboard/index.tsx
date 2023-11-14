@@ -30,7 +30,7 @@ const Dashboard = () => {
                     <div className="card-body">
                         <div className="row no-gutters align-items-center">
                             <div className="col mr-2">
-                                <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <div className="text-lg font-weight-bold text-primary text-uppercase mb-1">
                                     Tổng tiền nạp</div>
                                 <div className="h5 mb-0 font-weight-bold text-gray-800">{dataTotal?.total.toLocaleString('en-US')}</div>
                             </div>
@@ -47,7 +47,7 @@ const Dashboard = () => {
                     <div className="card-body">
                         <div className="row no-gutters align-items-center">
                             <div className="col mr-2">
-                                <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                <div className="text-lg font-weight-bold text-success text-uppercase mb-1">
                                 Tổng tiền chạy</div>
                                 <div className="h5 mb-0 font-weight-bold text-gray-800">{dataTotal?.earnings.toLocaleString('en-US')}</div>
                             </div>
@@ -64,7 +64,7 @@ const Dashboard = () => {
                     <div className="card-body">
                         <div className="row no-gutters align-items-center">
                             <div className="col mr-2">
-                                <div className="text-xs font-weight-bold text-info text-uppercase mb-1">Số lệnh đã chạy
+                                <div className="text-lg font-weight-bold text-info text-uppercase mb-1">Số lệnh đã chạy
                                 </div>
                                 <div className="row no-gutters align-items-center">
                                     <div className="col-auto">
@@ -85,7 +85,7 @@ const Dashboard = () => {
                     <div className="card-body">
                         <div className="row no-gutters align-items-center">
                             <div className="col mr-2">
-                                <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                <div className="text-lg font-weight-bold text-warning text-uppercase mb-1">
                                 Số lệnh đang chạy</div>
                                 <div className="h5 mb-0 font-weight-bold text-gray-800">{dataTotal?.pending.toLocaleString('en-US')}</div>
                             </div>

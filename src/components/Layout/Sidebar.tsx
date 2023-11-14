@@ -11,8 +11,8 @@ import Link from '@mui/material/Link';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
-import './style.scss'
-import toolplus from 'images/icon/toolplus.png'
+import './style.css'
+import toolplus from 'images/logo/toolplus.jpg'
 import { useNavigate } from 'react-router-dom';
 import { ICategory } from 'models';
 import { getCategoryId } from 'utils/apis/category';
@@ -32,7 +32,7 @@ export default function Sidebar(props: Props) {
     const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [open, setOpen] = React.useState<string>('');
-
+    const [menu, setMenu] = React.useState<string>('');
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -49,10 +49,15 @@ export default function Sidebar(props: Props) {
         }
     };
     const handleClickLink = (value: string) => {
-
-
         navigate(value);
     };
+    React.useEffect(()=>{
+        if (window.location.pathname ==="/"){
+            setMenu('/home')
+        }else{
+            setMenu(window.location.pathname)
+        }
+    },[menu])
     const drawer = (
         <div>
             <Link href="/home" sx={{ textDecoration: "none", color: "white", display: 'flex', justifyContent: 'center', height: '50px', m: 2 }}>
@@ -82,14 +87,14 @@ export default function Sidebar(props: Props) {
                                 <List component="div" disablePadding key={child.id}>
                                     <ListItemButton sx={{ pl: 4 }} onClick={() => handleClickLink(child.url)}
                                         className={classnames({
-                                            "list-item-active": window.location.pathname.replace('/', '') === child.url || window.location.pathname === child.url,
+                                            "list-item-active": menu.replace('/', '') === child.url || menu === child.url,
                                         })}
                                     >
-                                        <ListItemIcon style={{ minWidth: ' 20px !important' }}>
-                                            {(window.location.pathname.replace('/', '') === child.url || window.location.pathname === child.url) && (
-                                                <FontAwesomeIcon icon={faAnglesRight} style={{ color: "#FFC100", }} />
-                                            )}
-                                        </ListItemIcon>
+
+                                        {(menu.replace('/', '') === child.url || menu === child.url) && (
+                                            <ListItemIcon style={{ minWidth: ' 20px !important' }}><FontAwesomeIcon icon={faAnglesRight} style={{ color: "#CD6632", }} />
+                                            </ListItemIcon>)}
+
                                         <ListItemText primary={child.name} />
                                     </ListItemButton>
                                 </List>
@@ -104,7 +109,7 @@ export default function Sidebar(props: Props) {
 
     const container = windows !== undefined ? () => windows().document.body : undefined;
     const loadCategoryId = async (url: string) => {
-        if (url === "" || url === "/home" || url === "/history" || url === "/payment") {
+        if (url === "/" || url === "/home" || url === "/history" || url === "/payment") {
             setOpen("1")
         } else {
             let data = await getCategoryId(url)

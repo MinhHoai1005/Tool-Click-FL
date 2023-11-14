@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { LineChart } from '@mui/x-charts/LineChart';
 import moment from 'moment';
 import { getLineChartMoney } from 'utils/apis/account';
@@ -43,11 +43,18 @@ const LineChartMoney = () => {
             <LineChart
                 width={window.innerWidth * 3 / 4}
                 height={window.innerHeight * 3 / 4}
+
                 series={[
-                    { data: dataTotal?.action === undefined ? [0] : dataTotal?.action, label: 'Số lượng tiến trình' },
-                    { data: dataTotal?.amount_used === undefined ? [0] : dataTotal?.amount_used, label: 'Số tiền đã sử dụng' },
+                    {
+                        data: dataTotal?.action === undefined ? [0] : dataTotal?.action, label: 'Số lượng tiến trình',
+                    },
+                    {
+                        data: dataTotal?.amount_used === undefined ? [0] : dataTotal?.amount_used, label: 'Số tiền đã sử dụng',
+                       
+                    },
                 ]}
                 xAxis={[{ scaleType: 'point', data: xLabels }]}
+
             />
         </div>
 

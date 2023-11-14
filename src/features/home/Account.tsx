@@ -77,6 +77,10 @@ export const Account: React.FC<AccountProps> = (props) => {
           <TabPanel value="1">
             <Box >
               <Box >
+              <Box sx={{ display: 'flex' }}>
+                  <Typography sx={{ width: '200px', alignSelf: 'center' }}>ID khách hàng</Typography>
+                  <Input fullWidth value={accounts?.client_id} name="client_id" disabled onChange={handleInput} />
+                </Box>
                 <Box sx={{ display: 'flex' }}>
                   <Typography sx={{ width: '200px', alignSelf: 'center' }}>Tên Tài Khoản</Typography>
                   <Input fullWidth value={accounts?.user_name} name="user_name" onChange={handleInput} />
